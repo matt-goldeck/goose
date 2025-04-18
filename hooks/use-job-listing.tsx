@@ -1,7 +1,7 @@
 "use client";
 
 import { JobListingWithCompany } from "@/lib/types/db";
-import { getJobListings } from "@/utils/supabase/client";
+import { getJobListings } from "@/utils/supabase/client-queries";
 import * as React from "react";
 
 interface JobListingContext {

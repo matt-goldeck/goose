@@ -1,7 +1,7 @@
 "use client";
 
 import { JobCompany } from "@/lib/types/db";
-import { getJobCompanies } from "@/utils/supabase/client";
+import { getJobCompanies } from "@/utils/supabase/client-queries";
 import * as React from "react";
 
 interface JobCompanyContext {
@@ -43,6 +43,10 @@ export function JobCompanyProvider({ children }: JobCompanyProviderProps) {
     setIsLoadingJobCompanies(false);
     setHasLoadedJobCompanies(true);
   };
+
+  React.useEffect(() => {
+    loadJobCompanies();
+  }, []);
 
   return (
     <JobCompanyContext.Provider

@@ -24,6 +24,33 @@ export const getJobListingsForSBC = async (supabaseClient: SupabaseClient) => {
   return data as JobListingWithCompany[];
 };
 
+export const createJobListingForSBC = async (
+  supabaseClient: SupabaseClient,
+  jobListing: Partial<JobListingWithCompany>
+) => {
+  const { data, error } = await supabaseClient
+    .from("job_listing")
+    .insert(jobListing);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const updateJobListingForSBC = async (
+  supabaseClient: SupabaseClient,
+  jobListing: Partial<JobListingWithCompany>
+) => {
+  const { data, error } = await supabaseClient
+    .from("job_listing")
+    .update(jobListing)
+    .eq("id", jobListing.id);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
 export const getJobCompaniesForSBC = async (supabaseClient: SupabaseClient) => {
   const { data, error } = await supabaseClient.from("job_company").select("*");
   if (error) {
