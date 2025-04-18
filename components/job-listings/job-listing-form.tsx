@@ -133,9 +133,8 @@ export default function JobListingForm({
             value: company.id,
           }))}
           placeholder="Select a company"
-          className={classNames("w-full", {
-            "p-invalid": !!errors.job_company_id,
-          })}
+          className="w-full"
+          panelClassName="bg-white text-black dark:bg-zinc-800 dark:text-white"
         />
         {errors.job_company_id && (
           <small className="text-red-500">{errors.job_company_id}</small>

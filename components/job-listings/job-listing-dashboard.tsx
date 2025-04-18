@@ -7,22 +7,32 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { useState } from "react";
 import JobListingManageModal from "./job-listing-manage-modal";
 import { Button } from "primereact/button";
+import JobCompanyManageModal from "../job-companies/job-company-manage-modal";
 
 export default function JobListingDashboard() {
   const { jobListings, isLoadingJobListings } = useJobListing();
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddJobModal, setShowAddJobModal] = useState(false);
+  const [showAddCompanyModal, setShowAddCompanyModal] = useState(false);
 
   return (
     <>
       <div className="p-6 rounded-lg">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold">Your Job Listings</h1>
-          <Button
-            label="Add Listing"
-            icon="pi pi-plus"
-            className="bg-secondary p-2 rounded-md"
-            onClick={() => setShowAddModal(true)}
-          />
+          <div>
+            <Button
+              label="Add Company"
+              icon="pi pi-plus"
+              className="bg-secondary p-2 rounded-md mr-4"
+              onClick={() => setShowAddCompanyModal(true)}
+            />
+            <Button
+              label="Add Listing"
+              icon="pi pi-plus"
+              className="bg-secondary p-2 rounded-md"
+              onClick={() => setShowAddJobModal(true)}
+            />
+          </div>
         </div>
 
         {isLoadingJobListings ? (
@@ -72,8 +82,12 @@ export default function JobListingDashboard() {
         )}
       </div>
       <JobListingManageModal
-        isVisible={showAddModal}
-        setIsVisible={setShowAddModal}
+        isVisible={showAddJobModal}
+        setIsVisible={setShowAddJobModal}
+      />
+      <JobCompanyManageModal
+        isVisible={showAddCompanyModal}
+        setIsVisible={setShowAddCompanyModal}
       />
     </>
   );

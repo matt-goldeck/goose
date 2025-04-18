@@ -58,3 +58,30 @@ export const getJobCompaniesForSBC = async (supabaseClient: SupabaseClient) => {
   }
   return data as JobCompany[];
 };
+
+export const createJobCompanyForSBC = async (
+  supabaseClient: SupabaseClient,
+  jobCompany: Partial<JobCompany>
+) => {
+  const { data, error } = await supabaseClient
+    .from("job_company")
+    .insert(jobCompany);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const updateJobCompanyForSBC = async (
+  supabaseClient: SupabaseClient,
+  jobCompany: Partial<JobCompany>
+) => {
+  const { data, error } = await supabaseClient
+    .from("job_company")
+    .update(jobCompany)
+    .eq("id", jobCompany.id);
+  if (error) {
+    throw error;
+  }
+  return data;
+};

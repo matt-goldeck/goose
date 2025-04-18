@@ -1,11 +1,13 @@
 "use client";
 
-import { JobListing } from "@/lib/types/db";
+import { JobCompany, JobListing } from "@/lib/types/db";
 import { createClient } from "@/utils/supabase/client";
 import {
+  createJobCompanyForSBC,
   createJobListingForSBC,
   getJobCompaniesForSBC,
   getJobListingsForSBC,
+  updateJobCompanyForSBC,
   updateJobListingForSBC,
 } from "@/utils/supabase/queries";
 
@@ -27,4 +29,14 @@ export const createJobListing = async (jobListing: JobListing) => {
 export const updateJobListing = async (jobListing: JobListing) => {
   const supabase = createClient();
   return updateJobListingForSBC(supabase, jobListing);
+};
+
+export const createJobCompany = async (jobCompany: JobCompany) => {
+  const supabase = createClient();
+  return createJobCompanyForSBC(supabase, jobCompany);
+};
+
+export const updateJobCompany = async (jobCompany: JobCompany) => {
+  const supabase = createClient();
+  return updateJobCompanyForSBC(supabase, jobCompany);
 };
