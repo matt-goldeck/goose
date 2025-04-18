@@ -1,7 +1,7 @@
 import { JobCompanyProvider } from "@/hooks/use-job-company";
 import { JobListingProvider } from "@/hooks/use-job-listing";
 
-export default function ProtectedLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
