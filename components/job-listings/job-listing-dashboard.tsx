@@ -8,9 +8,11 @@ import { useState } from "react";
 import JobListingManageModal from "./job-listing-manage-modal";
 import { Button } from "primereact/button";
 import JobCompanyManageModal from "../job-companies/job-company-manage-modal";
+import Link from "next/link";
 
 export default function JobListingDashboard() {
-  const { jobListings, isLoadingJobListings } = useJobListing();
+  const { jobListings, isLoadingJobListings, loadJobListings } =
+    useJobListing();
   const [showAddJobModal, setShowAddJobModal] = useState(false);
   const [showAddCompanyModal, setShowAddCompanyModal] = useState(false);
 
@@ -53,6 +55,13 @@ export default function JobListingDashboard() {
                 field="title"
                 header="Title"
                 sortable
+                body={(row) => (
+                  <Link
+                    href={`/dashboard/listing/${row.id}`}
+                    className="text-blue-600 hover:underline font-medium">
+                    {row.title}
+                  </Link>
+                )}
                 bodyStyle={{ whiteSpace: "normal", padding: "1rem" }}
                 headerStyle={{ padding: "1rem" }}
               />
@@ -84,6 +93,10 @@ export default function JobListingDashboard() {
       <JobListingManageModal
         isVisible={showAddJobModal}
         setIsVisible={setShowAddJobModal}
+        onSubmitCallback={() => {
+          setShowAddJobModal(false);
+          loadJobListings(); // Refetch the job listings after adding a new one
+        }}
       />
       <JobCompanyManageModal
         isVisible={showAddCompanyModal}

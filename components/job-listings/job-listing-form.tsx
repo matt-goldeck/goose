@@ -33,6 +33,7 @@ export default function JobListingForm({
     user_notes: jobListing?.user_notes || "",
     job_company_id: jobListing?.job_company_id,
     user_id: undefined,
+    id: jobListing?.id,
   });
 
   const router = useRouter();

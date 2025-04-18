@@ -5,7 +5,9 @@ import { createClient } from "@/utils/supabase/client";
 import {
   createJobCompanyForSBC,
   createJobListingForSBC,
+  deleteJobListingForSBC,
   getJobCompaniesForSBC,
+  getJobListingByIdForSBC,
   getJobListingsForSBC,
   updateJobCompanyForSBC,
   updateJobListingForSBC,
@@ -39,4 +41,14 @@ export const createJobCompany = async (jobCompany: JobCompany) => {
 export const updateJobCompany = async (jobCompany: JobCompany) => {
   const supabase = createClient();
   return updateJobCompanyForSBC(supabase, jobCompany);
+};
+
+export const getJobListing = async (id: string) => {
+  const supabase = createClient();
+  return getJobListingByIdForSBC(supabase, id);
+};
+
+export const deleteJobListing = async (id: string) => {
+  const supabase = createClient();
+  return deleteJobListingForSBC(supabase, id);
 };
