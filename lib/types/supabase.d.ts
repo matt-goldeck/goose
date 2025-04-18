@@ -70,7 +70,7 @@ export type Database = {
         Row: {
           created_at: string
           description: string | null
-          id: number
+          id: string
           job_company_id: number
           title: string
           url: string | null
@@ -80,7 +80,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
-          id?: number
+          id?: string
           job_company_id: number
           title: string
           url?: string | null
@@ -90,7 +90,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
-          id?: number
+          id?: string
           job_company_id?: number
           title?: string
           url?: string | null
