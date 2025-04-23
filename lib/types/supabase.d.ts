@@ -72,6 +72,7 @@ export type Database = {
           description: string | null
           id: string
           job_company_id: number
+          resume_id: string | null
           title: string
           url: string | null
           user_id: string
@@ -82,6 +83,7 @@ export type Database = {
           description?: string | null
           id?: string
           job_company_id: number
+          resume_id?: string | null
           title: string
           url?: string | null
           user_id: string
@@ -92,6 +94,7 @@ export type Database = {
           description?: string | null
           id?: string
           job_company_id?: number
+          resume_id?: string | null
           title?: string
           url?: string | null
           user_id?: string
@@ -106,7 +109,49 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "job_listing_resume_id_fkey"
+            columns: ["resume_id"]
+            isOneToOne: false
+            referencedRelation: "resume"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "job_listing_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resume: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resume_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"

@@ -9,6 +9,7 @@ import {
   getJobCompaniesForSBC,
   getJobListingByIdForSBC,
   getJobListingsForSBC,
+  getResumesForSBC,
   updateJobCompanyForSBC,
   updateJobListingForSBC,
 } from "@/utils/supabase/queries";
@@ -51,4 +52,9 @@ export const getJobListing = async (id: string) => {
 export const deleteJobListing = async (id: string) => {
   const supabase = createClient();
   return deleteJobListingForSBC(supabase, id);
+};
+
+export const getResumes = async () => {
+  const supabase = createClient();
+  return getResumesForSBC(supabase);
 };

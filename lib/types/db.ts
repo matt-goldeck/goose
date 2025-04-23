@@ -5,3 +5,5 @@ export type JobListing = Tables<"job_listing">;
 export type JobListingWithCompany = JobListing & {
   job_company: JobCompany;
 };
+
+export type Resume = Tables<"resume">;

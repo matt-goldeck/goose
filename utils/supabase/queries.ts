@@ -114,3 +114,11 @@ export const updateJobCompanyForSBC = async (
   }
   return data;
 };
+
+export const getResumesForSBC = async (supabaseClient: SupabaseClient) => {
+  const { data, error } = await supabaseClient.from("resume").select("*");
+  if (error) {
+    throw error;
+  }
+  return data;
+};
