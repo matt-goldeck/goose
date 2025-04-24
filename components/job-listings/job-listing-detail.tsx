@@ -1,6 +1,5 @@
-import { Card } from "primereact/card";
-import { Button } from "primereact/button";
 import { JobListingWithCompany } from "@/lib/types/db";
+import { Card } from "primereact/card";
 
 export interface JobListingDetailProps {
   job: JobListingWithCompany;
@@ -8,36 +7,40 @@ export interface JobListingDetailProps {
 
 export default function JobListingDetail({ job }: JobListingDetailProps) {
   return (
-    <div className="max-w-3xl mx-auto p-6 border border-gray">
-      <Card title={job.title} subTitle={`${job.job_company.name}`}>
-        <div className="text-sm text-gray-500 mb-2">
-          Created at: {new Date(job.created_at).toLocaleString()}
-        </div>
-
+    <Card className="w-full bg-white dark:bg-zinc-900 shadow-sm rounded-2xl p-6 border border-zinc-200 dark:border-zinc-800">
+      <header className="mb-6">
+        <h1 className="text-2xl font-semibold text-zinc-900 dark:text-white">{job.title}</h1>
+        <p className="text-sm text-zinc-500 mt-1">{job.job_company.name}</p>
+        <p className="text-xs text-zinc-400 mt-1">
+          Created: {new Date(job.created_at).toLocaleString()}
+        </p>
         {job.url && (
           <a
             href={job.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-500 hover:underline block mb-4">
+            className="text-blue-600 dark:text-blue-400 text-sm underline mt-2 inline-block hover:underline-offset-2"
+          >
             View job post
           </a>
         )}
+      </header>
 
-        <h4 className="font-semibold mb-4">Description</h4>
-        <pre className="whitespace-pre-wrap p-4 rounded-md dark:bg-zinc-800 dark:text-white">
+      <section className="mb-6">
+        <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-2">Description</h2>
+        <div className="bg-zinc-100 dark:bg-zinc-800 rounded-md p-4 text-sm text-zinc-800 dark:text-zinc-100 whitespace-pre-wrap leading-relaxed">
           {job.description}
-        </pre>
+        </div>
+      </section>
 
-        {job.user_notes && (
-          <div className="mt-4 rounded-lg">
-            <h4 className="font-semibold mb-1 ">Your Notes</h4>
-            <p className="p-4 rounded-md dark:bg-zinc-800 dark:text-white">
-              {job.user_notes}
-            </p>
+      {job.user_notes && (
+        <section>
+          <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-2">Your Notes</h2>
+          <div className="bg-zinc-100 dark:bg-zinc-800 rounded-md p-4 text-sm text-zinc-800 dark:text-zinc-100 leading-relaxed">
+            {job.user_notes}
           </div>
-        )}
-      </Card>
-    </div>
+        </section>
+      )}
+    </Card>
   );
 }

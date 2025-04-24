@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "primereact/resources/themes/mdc-dark-indigo/theme.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -66,4 +70,13 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.btn-primary {
+  @apply bg-secondary text-foreground px-4 py-2 rounded-md hover:bg-secondary/80 transition text-sm;
+}
+
+.p-datatable thead > tr > th:hover {
+  background-color: #27272a !important; /* Zinc-800 or your preferred dark bg */
+  color: white !important;
 }

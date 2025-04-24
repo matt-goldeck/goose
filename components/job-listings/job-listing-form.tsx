@@ -139,7 +139,6 @@ export default function JobListingForm({
           }))}
           placeholder="Select a company"
           className="w-full"
-          panelClassName="bg-white text-black dark:bg-zinc-800 dark:text-white"
         />
         {errors.job_company_id && (
           <small className="text-red-500">{errors.job_company_id}</small>
@@ -160,7 +159,6 @@ export default function JobListingForm({
           }))}
           placeholder="Select a resume"
           className="w-full"
-          panelClassName="bg-white text-black dark:bg-zinc-800 dark:text-white"
         />
       </div>
 
@@ -195,7 +193,6 @@ export default function JobListingForm({
           label={jobListing ? "Update Listing" : "Create Listing"}
           type="submit"
           loading={isSubmitting}
-          className="bg-secondary rounded-md p-2"
         />
       </div>
     </form>

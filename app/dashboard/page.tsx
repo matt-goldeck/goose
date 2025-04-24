@@ -1,4 +1,5 @@
 import JobListingDashboard from "@/components/job-listings/job-listing-dashboard";
+import PageContainer from "@/components/ui/page-container";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -14,8 +15,8 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-12">
+    <PageContainer>
       <JobListingDashboard />
-    </div>
+    </PageContainer>
   );
 }

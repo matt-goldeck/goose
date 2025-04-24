@@ -19,7 +19,11 @@ export default function JobListingManageModal({
     <Dialog
       visible={isVisible}
       onHide={() => setIsVisible(false)}
-      className="bg-white text-black dark:bg-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-2xl w-full max-w-2xl p-6">
+      className="rounded-xl shadow-2xl w-full max-w-2xl"
+      header={
+        jobListing ? "Edit Job Listing" : "Add Job Listing"
+      }
+      >
       <JobListingForm
         jobListing={jobListing}
         onSubmitCallback={onSubmitCallback}
