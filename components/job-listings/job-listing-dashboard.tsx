@@ -5,34 +5,45 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useState } from "react";
-import JobListingManageModal from "./job-listing-manage-modal";
+import JobListingManageModal from "@/components/job-listings/job-listing-manage-modal";
 import { Button } from "primereact/button";
-import JobCompanyManageModal from "../job-companies/job-company-manage-modal";
+import JobCompanyManageModal from "@/components/job-companies/job-company-manage-modal";
 import Link from "next/link";
+import ResumeManageModal from "@/components/resumes/resume-manage-modal";
+import { useResume } from "@/hooks/use-resume";
 
 export default function JobListingDashboard() {
   const { jobListings, isLoadingJobListings, loadJobListings } =
     useJobListing();
+  const { loadResumes } = useResume();
+
   const [showAddJobModal, setShowAddJobModal] = useState(false);
   const [showAddCompanyModal, setShowAddCompanyModal] = useState(false);
+  const [showAddResumeModal, setShowAddResumeModal] = useState(false);
 
   return (
     <>
       <div className="p-6 rounded-lg">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold">Your Job Listings</h1>
-          <div>
-            <Button
-              label="Add Company"
-              icon="pi pi-plus"
-              className="bg-secondary p-2 rounded-md mr-4"
-              onClick={() => setShowAddCompanyModal(true)}
-            />
+          <div className="flex flex-row gap-3">
             <Button
               label="Add Listing"
               icon="pi pi-plus"
               className="bg-secondary p-2 rounded-md"
               onClick={() => setShowAddJobModal(true)}
+            />
+            <Button
+              label="Add Company"
+              icon="pi pi-plus"
+              className="bg-secondary p-2 rounded-md"
+              onClick={() => setShowAddCompanyModal(true)}
+            />
+            <Button
+              label="Add Resume"
+              icon="pi pi-plus"
+              className="bg-secondary p-2 rounded-md"
+              onClick={() => setShowAddResumeModal(true)}
             />
           </div>
         </div>
@@ -79,13 +90,6 @@ export default function JobListingDashboard() {
                 bodyStyle={{ padding: "1rem" }}
                 headerStyle={{ padding: "1rem" }}
               />
-              <Column
-                field="user_notes"
-                header="Notes"
-                body={(row) => row.user_notes || "—"}
-                bodyStyle={{ whiteSpace: "normal", padding: "1rem" }}
-                headerStyle={{ padding: "1rem" }}
-              />
             </DataTable>
           </div>
         )}
@@ -101,6 +105,14 @@ export default function JobListingDashboard() {
       <JobCompanyManageModal
         isVisible={showAddCompanyModal}
         setIsVisible={setShowAddCompanyModal}
+      />
+      <ResumeManageModal
+        isVisible={showAddResumeModal}
+        setIsVisible={setShowAddResumeModal}
+        onSubmitCallback={() => {
+          setShowAddResumeModal(false);
+          loadResumes();
+        }}
       />
     </>
   );
