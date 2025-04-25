@@ -8,12 +8,17 @@ export async function GET(request: Request) {
   // https://supabase.com/docs/guides/auth/server-side/nextjs
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
+  const redirectTo = requestUrl.searchParams.get("redirect_to")?.toString();
 
   if (code) {
     const supabase = await createClient();
     await supabase.auth.exchangeCodeForSession(code);
   }
 
-  // Push to dashboard after signup completes
+  if (redirectTo) {
+    return NextResponse.redirect(`${getFrontEndURL()}${redirectTo}`);
+  }
+
+  // Push to dashboard if no redirect
   return NextResponse.redirect(`${getFrontEndURL()}/dashboard`);
 }
