@@ -4,13 +4,12 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { createUserProfile } from "@/utils/supabase/server-queries";
+import { getFrontEndURL } from "@/utils/urls";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const supabase = await createClient();
-  const origin = (await headers()).get("origin");
 
   if (!email || !password) {
     return encodedRedirect(
@@ -24,7 +23,7 @@ export const signUpAction = async (formData: FormData) => {
     email,
     password,
     options: {
-      emailRedirectTo: `${origin}/auth/callback`,
+      emailRedirectTo: `${getFrontEndURL()}/auth/callback`,
     },
   });
 
@@ -35,9 +34,6 @@ export const signUpAction = async (formData: FormData) => {
     console.error(message);
     return encodedRedirect("error", "/sign-up", message);
   } else {
-    // Create user profile
-    createUserProfile(data.user.id, email);
-
     return encodedRedirect(
       "success",
       "/sign-up",
