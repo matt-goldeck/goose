@@ -16,7 +16,7 @@ export async function GET(request: Request) {
   }
 
   if (redirectTo) {
-    return NextResponse.redirect(`${getFrontEndURL()}${redirectTo}`);
+    return NextResponse.redirect(`${getFrontEndURL()}/${redirectTo}`);
   }
 
   // Push to dashboard if no redirect
