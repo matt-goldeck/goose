@@ -7,7 +7,7 @@ export const createUserProfileForSBC = async (
   email: string
 ) => {
   const { data, error } = await supabaseClient
-    .from("user")
+    .from("users")
     .insert({ id: userId, email: email });
   if (error) {
     throw error;
@@ -20,7 +20,7 @@ export const getOrCreateUserProfileForSBC = async (
   email: string
 ) => {
   const { data, error } = await supabaseClient
-    .from("user")
+    .from("users")
     .select("*")
     .eq("id", userId)
     .single();
