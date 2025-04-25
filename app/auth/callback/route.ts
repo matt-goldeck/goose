@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import { getOrCreateUserProfile } from "@/utils/supabase/server-queries";
 import { getFrontEndURL } from "@/utils/urls";
 import { NextResponse } from "next/server";
 
@@ -12,7 +13,16 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = await createClient();
-    await supabase.auth.exchangeCodeForSession(code);
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+    if (error) {
+      console.error("Error exchanging code for session:", error);
+      return NextResponse.redirect(`${getFrontEndURL()}/sign-in`);
+    }
+
+    // ensure a user profile exists for the user
+    if (data.user && data.user.email) {
+      await getOrCreateUserProfile(data.user.id, data.user.email);
+    }
   }
 
   if (redirectTo) {

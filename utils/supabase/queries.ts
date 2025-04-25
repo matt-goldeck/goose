@@ -14,6 +14,28 @@ export const createUserProfileForSBC = async (
   }
 };
 
+export const getOrCreateUserProfileForSBC = async (
+  supabaseClient: SupabaseClient,
+  userId: string,
+  email: string
+) => {
+  const { data, error } = await supabaseClient
+    .from("user")
+    .select("*")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    if (error.code === "PGRST116") {
+      await createUserProfileForSBC(supabaseClient, userId, email);
+    } else {
+      throw error;
+    }
+  }
+
+  return data;
+};
+
 export const getJobListingsForSBC = async (supabaseClient: SupabaseClient) => {
   const { data, error } = await supabaseClient
     .from("job_listing")
