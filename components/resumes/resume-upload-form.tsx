@@ -94,20 +94,22 @@ export default function ResumeUploadForm({
           }
         );
 
+        const responseData = await response.json();
+
         if (!response.ok) {
-          const errorData = await response.json();
-          setSubmitError(errorData.message);
+          setSubmitError(responseData.message || "Something went wrong");
           setIsSubmitting(false);
+          return;
         }
 
-        const data = await response.json();
+        // If successful
+        setSubmitError(null);
+        onSubmitCallback();
       } catch (error) {
-        setSubmitError(error as string);
+        setSubmitError((error as Error).message);
         setIsSubmitting(false);
         console.error("Error uploading resume:", error);
       }
-      setSubmitError(null);
-      onSubmitCallback();
     }
   };
 
@@ -136,7 +138,6 @@ export default function ResumeUploadForm({
           required
         />
         {errors.file && <small className="text-red-500">{errors.file}</small>}
-        {submitError && <small className="text-red-500">{submitError}</small>}
       </div>
 
       <Button
@@ -145,6 +146,7 @@ export default function ResumeUploadForm({
         className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         loading={isSubmitting}
       />
+      {submitError && <p className="text-red-500">{submitError}</p>}
     </form>
   );
 }
