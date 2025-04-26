@@ -1,11 +1,10 @@
 "use client";
 
 import { auth } from "@/auth-client";
-import { Session } from "@/lib/types/auth";
 import { Resume } from "@/lib/types/db";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export interface ResumeUploadFormProps {
   resume?: Resume;
@@ -43,6 +42,7 @@ export default function ResumeUploadForm({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (field: keyof Resume, value: string | number) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -69,8 +69,8 @@ export default function ResumeUploadForm({
     }
 
     if (resume) {
-      console.log("how did you get here...?")
-      // TODO: update resume workflow
+      console.log("how did you get here...?");
+      // TODO: create an update resume workflow
     } else {
       const session = await auth();
       if (!session || !session.accessToken) {
@@ -95,16 +95,18 @@ export default function ResumeUploadForm({
         );
 
         if (!response.ok) {
-          // TODO: gracefully handle errors
-          throw new Error("Upload failed");
+          const errorData = await response.json();
+          setSubmitError(errorData.message);
+          setIsSubmitting(false);
         }
 
         const data = await response.json();
       } catch (error) {
-        // TODO: gracefully handle errors
+        setSubmitError(error as string);
+        setIsSubmitting(false);
         console.error("Error uploading resume:", error);
-        throw new Error("Upload failed");
       }
+      setSubmitError(null);
       onSubmitCallback();
     }
   };
@@ -134,6 +136,7 @@ export default function ResumeUploadForm({
           required
         />
         {errors.file && <small className="text-red-500">{errors.file}</small>}
+        {submitError && <small className="text-red-500">{submitError}</small>}
       </div>
 
       <Button
