@@ -8,14 +8,14 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
 import JobListingManageModal from "@/components/job-listings/job-listing-manage-modal";
 import JobCompanyManageModal from "@/components/job-companies/job-company-manage-modal";
 import ResumeManageModal from "@/components/resumes/resume-manage-modal";
 import { formatDate } from "@/utils/dates";
 
 export default function JobListingDashboard() {
-  const { jobListings, isLoadingJobListings, loadJobListings } =
-    useJobListing();
+  const { jobListings, isLoadingJobListings, loadJobListings } = useJobListing();
   const { loadResumes } = useResume();
 
   const [modalState, setModalState] = useState({
@@ -24,11 +24,23 @@ export default function JobListingDashboard() {
     resume: false,
   });
 
+  const [outcomeFilter, setOutcomeFilter] = useState<"all" | "active" | "closed">("all");
+
   const openModal = (key: keyof typeof modalState) =>
     setModalState((prev) => ({ ...prev, [key]: true }));
 
   const closeModal = (key: keyof typeof modalState) =>
     setModalState((prev) => ({ ...prev, [key]: false }));
+
+  // Apply filtering based on outcome
+  const filteredJobListings = jobListings.filter((listing) => {
+    if (outcomeFilter === "active") {
+      return listing.application?.application_outcome == null;
+    } else if (outcomeFilter === "closed") {
+      return listing.application?.application_outcome != null;
+    }
+    return true; // no filter
+  });
 
   return (
     <>
@@ -38,6 +50,17 @@ export default function JobListingDashboard() {
             Your Job Listings
           </h1>
           <div className="flex flex-wrap gap-2">
+            <Dropdown
+              value={outcomeFilter}
+              options={[
+                { label: "All", value: "all" },
+                { label: "Active", value: "active" },
+                { label: "Closed", value: "closed" },
+              ]}
+              onChange={(e) => setOutcomeFilter(e.value)}
+              className="min-w-[140px]"
+              placeholder="Filter by Status"
+            />
             <Button
               label="Add Listing"
               icon="pi pi-plus"
@@ -66,13 +89,14 @@ export default function JobListingDashboard() {
         ) : (
           <div className="overflow-x-auto">
             <DataTable
-              value={jobListings}
+              value={filteredJobListings}
               paginator
               rows={10}
               className="rounded-lg shadow-sm"
               stripedRows
               tableStyle={{ minWidth: "100%" }}
               rowClassName={() => "text-sm"}>
+              
               <Column
                 field="title"
                 header="Title"
@@ -96,6 +120,18 @@ export default function JobListingDashboard() {
                   </span>
                 )}
               />
+
+              <Column
+                field="application.application_outcome"
+                header="Outcome"
+                sortable
+                body={(row) =>
+                  row.application?.application_outcome
+                    ? row.application.application_outcome.type
+                    : "Active"
+                }
+              />
+
               <Column
                 field="created_at"
                 header="Created At"

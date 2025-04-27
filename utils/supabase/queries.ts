@@ -1,4 +1,7 @@
-import { JobCompany, JobListingWithCompany } from "@/lib/types/db";
+import {
+  JobCompany,
+  JobListingWithCompanyAndApplication,
+} from "@/lib/types/db";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const createUserProfileForSBC = async (
@@ -39,11 +42,11 @@ export const getOrCreateUserProfileForSBC = async (
 export const getJobListingsForSBC = async (supabaseClient: SupabaseClient) => {
   const { data, error } = await supabaseClient
     .from("job_listing")
-    .select("*, job_company(*)");
+    .select("*, job_company(*), application(*, application_outcome(*))");
   if (error) {
     throw error;
   }
-  return data as JobListingWithCompany[];
+  return data as JobListingWithCompanyAndApplication[];
 };
 
 export const getJobListingByIdForSBC = async (
@@ -52,18 +55,20 @@ export const getJobListingByIdForSBC = async (
 ) => {
   const { data, error } = await supabaseClient
     .from("job_listing")
-    .select("*, job_company(*)")
+    .select(
+      "*, job_company(*), application(*, application_outcome(*), application_step(*))"
+    )
     .eq("id", id)
     .single();
   if (error) {
     throw error;
   }
-  return data as JobListingWithCompany;
+  return data as JobListingWithCompanyAndApplication;
 };
 
 export const createJobListingForSBC = async (
   supabaseClient: SupabaseClient,
-  jobListing: Partial<JobListingWithCompany>
+  jobListing: Partial<JobListingWithCompanyAndApplication>
 ) => {
   const { data, error } = await supabaseClient
     .from("job_listing")
@@ -76,7 +81,7 @@ export const createJobListingForSBC = async (
 
 export const updateJobListingForSBC = async (
   supabaseClient: SupabaseClient,
-  jobListing: Partial<JobListingWithCompany>
+  jobListing: Partial<JobListingWithCompanyAndApplication>
 ) => {
   const { data, error } = await supabaseClient
     .from("job_listing")

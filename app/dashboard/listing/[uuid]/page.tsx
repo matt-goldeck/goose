@@ -12,12 +12,12 @@ import {
   getJobListing,
   deleteJobListing,
 } from "@/utils/supabase/client-queries";
-import { JobListingWithCompany } from "@/lib/types/db";
+import { JobListingWithCompanyAndApplication } from "@/lib/types/db";
 
 export default function JobListingDetailPage() {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [jobListing, setJobListing] = useState<JobListingWithCompany | null>(
+  const [jobListing, setJobListing] = useState<JobListingWithCompanyAndApplication | null>(
     null
   );
 

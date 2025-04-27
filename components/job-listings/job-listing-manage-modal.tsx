@@ -1,9 +1,9 @@
 import { Dialog } from "primereact/dialog";
-import { JobListingWithCompany } from "@/lib/types/db";
+import { JobListingWithCompanyAndApplication } from "@/lib/types/db";
 import JobListingForm from "./job-listing-form";
 
 export interface JobListingManageModalProps {
-  jobListing?: JobListingWithCompany;
+  jobListing?: JobListingWithCompanyAndApplication;
   isVisible: boolean;
   setIsVisible: (isVisible: boolean) => void;
   onSubmitCallback: () => void;

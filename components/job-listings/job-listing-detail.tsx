@@ -1,8 +1,8 @@
-import { JobListingWithCompany } from "@/lib/types/db";
+import { JobListingWithCompanyAndApplication } from "@/lib/types/db";
 import { Card } from "primereact/card";
 
 export interface JobListingDetailProps {
-  job: JobListingWithCompany;
+  job: JobListingWithCompanyAndApplication;
 }
 
 export default function JobListingDetail({ job }: JobListingDetailProps) {
