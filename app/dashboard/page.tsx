@@ -1,5 +1,6 @@
 import JobListingDashboard from "@/components/job-listings/job-listing-dashboard";
 import PageContainer from "@/components/ui/page-container";
+import { JobListingProvider } from "@/hooks/use-job-listing";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -16,7 +17,9 @@ export default async function DashboardPage() {
 
   return (
     <PageContainer>
-      <JobListingDashboard />
+      <JobListingProvider>
+        <JobListingDashboard />
+      </JobListingProvider>
     </PageContainer>
   );
 }
