@@ -1,5 +1,4 @@
 import { useJobListingDetail } from "@/hooks/use-job-listing-detail";
-import { JobListingWithCompanyAndApplication } from "@/lib/types/db";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useState } from "react";
@@ -7,6 +6,8 @@ import JobListingManageModal from "./job-listing-manage-modal";
 import { Button } from "primereact/button";
 import { deleteJobListing } from "@/utils/supabase/client-queries";
 import { useRouter } from "next/navigation";
+import { Divider } from "primereact/divider";
+import { ApplicationDetail } from "./application/application-detail";
 
 export default function JobListingDetail() {
   const router = useRouter();
@@ -29,62 +30,71 @@ export default function JobListingDetail() {
   }
 
   return (
-    <>
-      <Card className="w-full bg-white dark:bg-zinc-900 shadow-sm rounded-2xl p-6 border border-zinc-200 dark:border-zinc-800">
-        <header className="mb-6">
-          <h1 className="text-2xl font-semibold text-zinc-900 dark:text-white">
+    <div className="w-full px-4 py-10">
+      <Card className="w-full max-w-3xl mx-auto bg-white dark:bg-zinc-900 shadow-sm rounded-2xl p-6 border border-zinc-200 dark:border-zinc-800">
+        <header className="flex flex-col items-center text-center mb-6">
+          <h1 className="text-2xl font-semibold text-zinc-900 dark:text-white mb-2">
             {jobListing.title}
           </h1>
-          <p className="text-sm text-zinc-500 mt-1">
+          <h2 className="text-md font-semibold text-zinc-700 dark:text-zinc-300 mb-2">
             {jobListing.job_company.name}
-          </p>
-          <p className="text-xs text-zinc-400 mt-1">
-            Created: {new Date(jobListing.created_at).toLocaleString()}
-          </p>
+          </h2>
+          <div className="flex gap-2">
+            <Button
+              icon="pi pi-pencil"
+              tooltip="Edit"
+              className="p-button-rounded p-button-text text-primary dark:text-primary"
+              onClick={() => setEditModalVisible(true)}
+            />
+            <Button
+              icon="pi pi-trash"
+              tooltip="Delete"
+              className="p-button-rounded p-button-text text-primary dark:text-primary"
+              severity="danger"
+              onClick={handleDelete}
+            />
+          </div>
           {jobListing.url && (
             <a
               href={jobListing.url}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 dark:text-blue-400 text-sm underline mt-2 inline-block hover:underline-offset-2">
-              View job post
+              View listing
             </a>
           )}
+
+          <p className="text-xs text-zinc-400 mt-1">
+            Created: {new Date(jobListing.created_at).toLocaleString()}
+          </p>
         </header>
 
-        <section className="mb-6">
-          <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-2">
+        <section className="flex flex-col items-center text-center mb-6">
+          <p className="font-semibold text-zinc-700 dark:text-zinc-300 mb-2">
             Description
-          </h2>
-          <div className="bg-zinc-100 dark:bg-zinc-800 rounded-md p-4 text-sm text-zinc-800 dark:text-zinc-100 whitespace-pre-wrap leading-relaxed">
+          </p>
+          <div className="bg-zinc-100 dark:bg-zinc-800 rounded-md p-4 text-sm text-zinc-800 dark:text-zinc-100 whitespace-pre-wrap leading-relaxed text-left w-full">
             {jobListing.description}
           </div>
         </section>
 
         {jobListing.user_notes && (
-          <section>
-            <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-2">
-              Your Notes
-            </h2>
-            <div className="bg-zinc-100 dark:bg-zinc-800 rounded-md p-4 text-sm text-zinc-800 dark:text-zinc-100 leading-relaxed">
+          <section className="flex flex-col items-center text-center mb-6">
+            <p className="font-semibold text-zinc-700 dark:text-zinc-300 mb-2">
+              Notes
+            </p>
+            <div className="bg-zinc-100 dark:bg-zinc-800 rounded-md p-4 text-sm text-zinc-800 dark:text-zinc-100 leading-relaxed text-left w-full">
               {jobListing.user_notes}
             </div>
           </section>
         )}
-        <div className="flex gap-4">
-          <Button
-            label="Edit"
-            icon="pi pi-pencil"
-            onClick={() => setEditModalVisible(true)}
-          />
-          <Button
-            label="Delete"
-            icon="pi pi-trash"
-            severity="danger"
-            onClick={handleDelete}
-          />
-        </div>
+
+        <Divider className="mt-4 mb-6 border-t border-zinc-300 dark:border-zinc-700" />
+        <section className="flex flex-col text-center">
+          <ApplicationDetail />
+        </section>
       </Card>
+
       <JobListingManageModal
         isVisible={editModalVisible}
         setIsVisible={setEditModalVisible}
@@ -94,6 +104,6 @@ export default function JobListingDetail() {
           setEditModalVisible(false);
         }}
       />
-    </>
+    </div>
   );
 }

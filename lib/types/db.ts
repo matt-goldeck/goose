@@ -16,3 +16,11 @@ export type JobListingWithCompanyAndApplication = JobListing & {
 };
 
 export type Resume = Tables<"resume">;
+
+export const APPLICATION_STEP_TYPES = [
+  "phone_screener",
+  "interview",
+  "onsite",
+  "final_round",
+] as const;
+export type ApplicationStepType = typeof APPLICATION_STEP_TYPES[number];

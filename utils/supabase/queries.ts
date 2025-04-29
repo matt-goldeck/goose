@@ -1,4 +1,5 @@
 import {
+  ApplicationStep,
   JobCompany,
   JobListingWithCompanyAndApplication,
 } from "@/lib/types/db";
@@ -60,10 +61,16 @@ export const getJobListingByIdForSBC = async (
     )
     .eq("id", id)
     .single();
+
   if (error) {
     throw error;
   }
-  return data as JobListingWithCompanyAndApplication;
+
+  // Ensure `application` is a single object instead of an array
+  return {
+    ...data,
+    application: data.application?.[0] ?? null,
+  } as JobListingWithCompanyAndApplication;
 };
 
 export const createJobListingForSBC = async (
@@ -144,6 +151,96 @@ export const updateJobCompanyForSBC = async (
 
 export const getResumesForSBC = async (supabaseClient: SupabaseClient) => {
   const { data, error } = await supabaseClient.from("resume").select("*");
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const createApplicationForSBC = async (
+  supabaseClient: SupabaseClient,
+  jobListingId: string,
+  userId: string
+) => {
+  const { data, error } = await supabaseClient.from("application").insert({
+    job_listing_id: jobListingId,
+    user_id: userId,
+    applied_on: new Date(),
+  });
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const createApplicationStepForSBC = async (
+  supabaseClient: SupabaseClient,
+  step: Partial<ApplicationStep>
+) => {
+  const { data, error } = await supabaseClient
+    .from("application_step")
+    .insert(step);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const updateAppliationStepForSBC = async (
+  supabaseClient: SupabaseClient,
+  step: Partial<ApplicationStep>
+) => {
+  const { data, error } = await supabaseClient
+    .from("application_step")
+    .update(step)
+    .eq("id", step.id);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const deleteApplicationStepForSBC = async (
+  supabaseClient: SupabaseClient,
+  stepId: number
+) => {
+  const { data, error } = await supabaseClient
+    .from("application_step")
+    .delete()
+    .eq("id", stepId);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const createApplicationOutcomeForSBC = async (
+  supabaseClient: SupabaseClient,
+  applicationId: number,
+  outcomeType: string,
+  outcomeNotes: string
+) => {
+  const { data, error } = await supabaseClient
+    .from("application_outcome")
+    .insert({
+      application_id: applicationId,
+      outcome_type: outcomeType,
+      outcome_notes: outcomeNotes,
+    });
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const deleteApplicationOutcomeForSBC = async (
+  supabaseClient: SupabaseClient,
+  outcomeId: number
+) => {
+  const { data, error } = await supabaseClient
+    .from("application_outcome")
+    .delete()
+    .eq("id", outcomeId);
   if (error) {
     throw error;
   }
