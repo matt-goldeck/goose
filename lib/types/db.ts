@@ -23,4 +23,12 @@ export const APPLICATION_STEP_TYPES = [
   "onsite",
   "final_round",
 ] as const;
-export type ApplicationStepType = typeof APPLICATION_STEP_TYPES[number];
+export type ApplicationStepType = (typeof APPLICATION_STEP_TYPES)[number];
+
+export const APPLICATION_OUTCOME_TYPES = [
+  "ghosted",
+  "rejected",
+  "turned_down",
+  "accepted",
+] as const;
+export type ApplicationOutcomeType = (typeof APPLICATION_OUTCOME_TYPES)[number];

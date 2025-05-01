@@ -1,4 +1,5 @@
 import {
+  ApplicationOutcome,
   ApplicationStep,
   JobCompany,
   JobListingWithCompanyAndApplication,
@@ -66,10 +67,17 @@ export const getJobListingByIdForSBC = async (
     throw error;
   }
 
-  // Ensure `application` is a single object instead of an array
+  // Reshape application and its outcome
+  const application = data.application?.[0]
+    ? {
+        ...data.application[0],
+        application_outcome: data.application[0].application_outcome?.[0] ?? null,
+      }
+    : null;
+
   return {
     ...data,
-    application: data.application?.[0] ?? null,
+    application,
   } as JobListingWithCompanyAndApplication;
 };
 
@@ -216,17 +224,25 @@ export const deleteApplicationStepForSBC = async (
 
 export const createApplicationOutcomeForSBC = async (
   supabaseClient: SupabaseClient,
-  applicationId: number,
-  outcomeType: string,
-  outcomeNotes: string
+  outcome: Partial<ApplicationOutcome>
 ) => {
   const { data, error } = await supabaseClient
     .from("application_outcome")
-    .insert({
-      application_id: applicationId,
-      outcome_type: outcomeType,
-      outcome_notes: outcomeNotes,
-    });
+    .insert(outcome);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const updateApplicationOutcomeForSBC = async (
+  supabaseClient: SupabaseClient,
+  outcome: Partial<ApplicationStep>
+) => {
+  const { data, error } = await supabaseClient
+    .from("application_outcome")
+    .update(outcome)
+    .eq("id", outcome.id);
   if (error) {
     throw error;
   }
