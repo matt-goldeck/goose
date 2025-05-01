@@ -8,6 +8,7 @@ import {
   createApplicationStepForSBC,
   createJobCompanyForSBC,
   createJobListingForSBC,
+  deleteApplicationForSBC,
   deleteApplicationOutcomeForSBC,
   deleteApplicationStepForSBC,
   deleteJobListingForSBC,
@@ -109,4 +110,9 @@ export const createApplicationOutcome = async (
 export const deleteApplicationOutcome = (outcomeId: number) => {
   const supabase = createClient();
   return deleteApplicationOutcomeForSBC(supabase, outcomeId);
+};
+
+export const deleteApplication = (applicationId: number) => {
+  const supabase = createClient();
+  return deleteApplicationForSBC(supabase, applicationId);
 };

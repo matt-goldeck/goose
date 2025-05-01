@@ -35,18 +35,10 @@ export const ApplicationDetail = () => {
   }
   return (
     <div className="flex flex-col">
-      <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
-        Application
-      </h2>
-      <p className="text-sm text-zinc-500">
-        Applied at:{" "}
-        {new Date(jobListing.application.applied_on).toLocaleString()}
-      </p>
       <TabView className="text-primary">
         <TabPanel header="Steps">
           <ApplicationSteps/>
         </TabPanel>
-        <TabPanel header="Outcome"></TabPanel>
       </TabView>
     </div>
   );

@@ -246,3 +246,17 @@ export const deleteApplicationOutcomeForSBC = async (
   }
   return data;
 };
+
+export const deleteApplicationForSBC = async (
+  supabaseClient: SupabaseClient,
+  applicationId: number
+) => {
+  const { data, error } = await supabaseClient
+    .from("application")
+    .delete()
+    .eq("id", applicationId);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
