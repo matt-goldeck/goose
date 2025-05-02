@@ -15,7 +15,6 @@ import {
 import { auth } from "@/auth-client";
 import { Session } from "@/lib/types/auth";
 import { useRouter } from "next/navigation";
-import { useResume } from "@/hooks/use-resume";
 
 type JobListingFormProps = {
   onSubmitCallback: () => void;
@@ -27,7 +26,6 @@ export default function JobListingForm({
   jobListing,
 }: JobListingFormProps) {
   const { jobCompanies } = useJobCompany();
-  const { resumes } = useResume();
 
   const [formData, setFormData] = useState<Partial<JobListing>>({
     title: jobListing?.title || "",
@@ -37,7 +35,6 @@ export default function JobListingForm({
     job_company_id: jobListing?.job_company_id,
     user_id: undefined,
     id: jobListing?.id,
-    resume_id: jobListing?.resume_id,
   });
 
   const router = useRouter();
@@ -144,24 +141,6 @@ export default function JobListingForm({
           <small className="text-red-500">{errors.job_company_id}</small>
         )}
       </div>
-
-      <div>
-        <label htmlFor="resume_id" className="block font-medium mb-1">
-          Resume
-        </label>
-        <Dropdown
-          id="resume_id"
-          value={formData.resume_id}
-          onChange={(e) => handleChange("resume_id", e.value)}
-          options={resumes.map((resume) => ({
-            label: resume.name,
-            value: resume.id,
-          }))}
-          placeholder="Select a resume"
-          className="w-full"
-        />
-      </div>
-
       <div>
         <label htmlFor="description" className="block font-medium mb-1">
           Description
