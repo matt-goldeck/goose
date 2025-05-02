@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Dropdown } from "primereact/dropdown";
@@ -9,12 +9,14 @@ import { classNames } from "primereact/utils";
 import { useJobCompany } from "@/hooks/use-job-company";
 import { JobListing } from "@/lib/types/db";
 import {
+  createApplication,
   createJobListing,
   updateJobListing,
 } from "@/utils/supabase/client-queries";
 import { auth } from "@/auth-client";
 import { Session } from "@/lib/types/auth";
 import { useRouter } from "next/navigation";
+import { Checkbox } from "primereact/checkbox";
 
 type JobListingFormProps = {
   onSubmitCallback: () => void;
@@ -36,6 +38,8 @@ export default function JobListingForm({
     user_id: undefined,
     id: jobListing?.id,
   });
+  const [userSubmittedApplication, setUserSubmittedApplication] =
+    useState(true);
 
   const router = useRouter();
   useEffect(() => {
@@ -77,16 +81,24 @@ export default function JobListingForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+  
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
+    // Upsert job listing
+    let result: JobListing;
     if (jobListing) {
-      await updateJobListing(formData as JobListing);
+      result = await updateJobListing(formData as JobListing);
     } else {
-      await createJobListing(formData as JobListing);
+      result = await createJobListing(formData as JobListing);
+    }
+
+    // Create app
+    if (userSubmittedApplication) {
+      await createApplication(result.id);
     }
 
     onSubmitCallback();
@@ -96,7 +108,7 @@ export default function JobListingForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 p-6 rounded-lg shadow-md">
+      className="space-y-3 p-6 rounded-lg shadow-md">
       <div>
         <label htmlFor="title" className="block font-medium mb-1">
           Job Title
@@ -166,7 +178,16 @@ export default function JobListingForm({
           className="w-full"
         />
       </div>
-
+      <div className="flex items-center gap-2">
+        <Checkbox
+          inputId="user-submitted-application"
+          checked={userSubmittedApplication}
+          onChange={(e) => setUserSubmittedApplication(e.checked ?? false)}
+        />
+        <label htmlFor="user-submitted-application" className="font-medium">
+          Submitted Application
+        </label>
+      </div>
       <div className="flex justify-end">
         <Button
           label={jobListing ? "Update Listing" : "Create Listing"}

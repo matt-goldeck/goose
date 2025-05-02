@@ -71,7 +71,8 @@ export const getJobListingByIdForSBC = async (
   const application = data.application?.[0]
     ? {
         ...data.application[0],
-        application_outcome: data.application[0].application_outcome?.[0] ?? null,
+        application_outcome:
+          data.application[0].application_outcome?.[0] ?? null,
       }
     : null;
 
@@ -87,7 +88,9 @@ export const createJobListingForSBC = async (
 ) => {
   const { data, error } = await supabaseClient
     .from("job_listing")
-    .insert(jobListing);
+    .insert(jobListing)
+    .select()
+    .single();
   if (error) {
     throw error;
   }
@@ -101,7 +104,9 @@ export const updateJobListingForSBC = async (
   const { data, error } = await supabaseClient
     .from("job_listing")
     .update(jobListing)
-    .eq("id", jobListing.id);
+    .eq("id", jobListing.id)
+    .select()
+    .single();
   if (error) {
     throw error;
   }
