@@ -1,7 +1,10 @@
 import {
   ApplicationOutcome,
   ApplicationStep,
+  CompatibilityScore,
+  CompatibilityScoreWithResume,
   JobCompany,
+  JobListingDetail,
   JobListingWithCompanyAndApplication,
 } from "@/lib/types/db";
 import { SupabaseClient } from "@supabase/supabase-js";
@@ -58,7 +61,7 @@ export const getJobListingByIdForSBC = async (
   const { data, error } = await supabaseClient
     .from("job_listing")
     .select(
-      "*, job_company(*), application(*, application_outcome(*), application_step(*))"
+      "*, job_company(*), application(*, application_outcome(*), application_step(*)), compatibility_score(*, resume(*))"
     )
     .eq("id", id)
     .single();
@@ -79,7 +82,7 @@ export const getJobListingByIdForSBC = async (
   return {
     ...data,
     application,
-  } as JobListingWithCompanyAndApplication;
+  } as JobListingDetail;
 };
 
 export const createJobListingForSBC = async (
@@ -280,4 +283,18 @@ export const deleteApplicationForSBC = async (
     throw error;
   }
   return data;
+};
+
+export const getCompatibilityScoresForSBC = async (
+  supabaseClient: SupabaseClient,
+  jobListingId: string
+) => {
+  const { data, error } = await supabaseClient
+    .from("compatibility_score")
+    .select("*")
+    .eq("job_listing_id", jobListingId);
+  if (error) {
+    throw error;
+  }
+  return data as CompatibilityScore[];
 };

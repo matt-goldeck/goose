@@ -8,6 +8,8 @@ import { deleteJobListing } from "@/utils/supabase/client-queries";
 import { useRouter } from "next/navigation";
 import { Divider } from "primereact/divider";
 import { ApplicationDetail } from "./application/application-detail";
+import { TabPanel, TabView } from "primereact/tabview";
+import { CompatibilityScores } from "./compatibility/compatibility-scores";
 
 export default function JobListingDetail() {
   const router = useRouter();
@@ -91,7 +93,14 @@ export default function JobListingDetail() {
 
         <Divider className="mt-4 mb-6 border-t border-zinc-300 dark:border-zinc-700" />
         <section className="flex flex-col text-center">
-          <ApplicationDetail />
+          <TabView className="text-primary">
+            <TabPanel header="Application">
+              <ApplicationDetail />
+            </TabPanel>
+            <TabPanel header="Compatibility">
+              <CompatibilityScores />
+            </TabPanel>
+          </TabView>
         </section>
       </Card>
 

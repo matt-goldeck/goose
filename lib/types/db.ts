@@ -1,11 +1,17 @@
 import { Tables } from "./supabase";
 
+export type Resume = Tables<"resume">;
+
 export type Application = Tables<"application">;
 export type ApplicationStep = Tables<"application_step">;
 export type ApplicationOutcome = Tables<"application_outcome">;
 export type ApplicationWithStepsAndOutcome = Application & {
   application_step: ApplicationStep[];
   application_outcome: ApplicationOutcome | null;
+};
+export type CompatibilityScore = Tables<"compatibility_score">;
+export type CompatibilityScoreWithResume = CompatibilityScore & {
+  resume: Resume;
 };
 
 export type JobCompany = Tables<"job_company">;
@@ -14,8 +20,11 @@ export type JobListingWithCompanyAndApplication = JobListing & {
   job_company: JobCompany;
   application: ApplicationWithStepsAndOutcome | null;
 };
-
-export type Resume = Tables<"resume">;
+export type JobListingDetail = JobListing & {
+  job_company: JobCompany;
+  application: ApplicationWithStepsAndOutcome | null;
+  compatibility_score: CompatibilityScoreWithResume[];
+};
 
 export const APPLICATION_STEP_TYPES = [
   "phone_screener",

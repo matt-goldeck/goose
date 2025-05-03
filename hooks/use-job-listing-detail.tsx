@@ -1,11 +1,11 @@
 "use client";
 
-import { JobListingWithCompanyAndApplication } from "@/lib/types/db";
+import { JobListingDetail } from "@/lib/types/db";
 import { getJobListing } from "@/utils/supabase/client-queries";
 import * as React from "react";
 
 interface JobListingDetailContext {
-  jobListing: JobListingWithCompanyAndApplication | null;
+  jobListing: JobListingDetail | null;
   isLoadingJobListing: boolean;
   hasLoadedJobListing: boolean;
   loadJobListing: () => void;
@@ -35,7 +35,7 @@ export function JobListingDetailProvider({
   children,
 }: JobListingDetailProviderProps) {
   const [jobListing, setJobListing] =
-    React.useState<JobListingWithCompanyAndApplication | null>(null);
+    React.useState<JobListingDetail | null>(null);
   const [isLoadingJobListing, setIsLoadingJobListing] = React.useState(true);
   const [hasLoadedJobListing, setHasLoadedJobListing] = React.useState(false);
 

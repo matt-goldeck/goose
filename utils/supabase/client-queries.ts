@@ -1,6 +1,11 @@
 "use client";
 
-import { ApplicationOutcome, ApplicationStep, JobCompany, JobListing } from "@/lib/types/db";
+import {
+  ApplicationOutcome,
+  ApplicationStep,
+  JobCompany,
+  JobListing,
+} from "@/lib/types/db";
 import { createClient } from "@/utils/supabase/client";
 import {
   createApplicationForSBC,
@@ -12,6 +17,7 @@ import {
   deleteApplicationOutcomeForSBC,
   deleteApplicationStepForSBC,
   deleteJobListingForSBC,
+  getCompatibilityScoresForSBC,
   getJobCompaniesForSBC,
   getJobListingByIdForSBC,
   getJobListingsForSBC,
@@ -95,13 +101,10 @@ export const deleteApplicationStep = async (stepId: number) => {
 };
 
 export const createApplicationOutcome = async (
-outcome: Partial<ApplicationOutcome>,
+  outcome: Partial<ApplicationOutcome>
 ) => {
   const supabase = createClient();
-  return createApplicationOutcomeForSBC(
-    supabase,
-    outcome
-  );
+  return createApplicationOutcomeForSBC(supabase, outcome);
 };
 
 export const updateApplicationOutcome = async (
@@ -119,4 +122,9 @@ export const deleteApplicationOutcome = (outcomeId: number) => {
 export const deleteApplication = (applicationId: number) => {
   const supabase = createClient();
   return deleteApplicationForSBC(supabase, applicationId);
+};
+
+export const getCompatibilityScores = (jobListingId: string) => {
+  const supabase = createClient();
+  return getCompatibilityScoresForSBC(supabase, jobListingId);
 };

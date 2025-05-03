@@ -35,11 +35,7 @@ export const ApplicationDetail = () => {
   }
   return (
     <div className="flex flex-col">
-      <TabView className="text-primary">
-        <TabPanel header="Steps">
-          <ApplicationSteps/>
-        </TabPanel>
-      </TabView>
+      <ApplicationSteps/>
     </div>
   );
 };
