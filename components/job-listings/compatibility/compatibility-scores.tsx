@@ -33,7 +33,7 @@ export function CompatibilityScores() {
         </p>
         <Button
           label="Calculate Score"
-          className="mt-4 bg-zinc-700 p-3"
+          className="mt-4 p-3"
           onClick={() => setIsAddScoreModalVisible(true)}
         />
         <CompatibilityScoreManageModal
@@ -83,7 +83,7 @@ export function CompatibilityScores() {
       })}
       <Button
         label="Add a Score"
-        className="mt-4 bg-zinc-700 p-3"
+        className="mt-4 p-3"
         onClick={() => setIsAddScoreModalVisible(true)}
       />
       <CompatibilityScoreManageModal

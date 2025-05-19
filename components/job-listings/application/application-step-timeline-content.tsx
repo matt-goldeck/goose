@@ -26,22 +26,23 @@ export const ApplicationStepTimelineContent = ({
   return (
     <Card
       title={formatTypeString(step.step_type)}
-      subTitle={new Date(step.created_at).toLocaleString()}
-      className="bg-zinc-600 dark:bg-zinc-800">
+      subTitle={new Date(step.created_at).toLocaleString()}>
       <p className="text-sm">{step.notes}</p>
       <div>
         <Button
           icon="pi pi-pencil"
           tooltip="Edit"
-          className="p-button-rounded p-button-text text-primary dark:text-primary"
           onClick={() => setEditModalVisible(true)}
+          text
+          rounded
         />
         <Button
           icon="pi pi-trash"
           tooltip="Delete"
-          className="p-button-rounded p-button-text text-primary dark:text-primary"
           severity="danger"
           onClick={handleDelete}
+          text
+          rounded
         />
       </div>
       <ApplicationStepManageModal

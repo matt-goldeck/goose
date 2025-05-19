@@ -15,7 +15,8 @@ import ResumeManageModal from "@/components/resumes/resume-manage-modal";
 import { formatDate } from "@/utils/dates";
 
 export default function JobListingDashboard() {
-  const { jobListings, isLoadingJobListings, loadJobListings } = useJobListing();
+  const { jobListings, isLoadingJobListings, loadJobListings } =
+    useJobListing();
   const { loadResumes } = useResume();
 
   const [modalState, setModalState] = useState({
@@ -24,7 +25,9 @@ export default function JobListingDashboard() {
     resume: false,
   });
 
-  const [outcomeFilter, setOutcomeFilter] = useState<"all" | "active" | "closed">("all");
+  const [outcomeFilter, setOutcomeFilter] = useState<
+    "all" | "active" | "closed"
+  >("all");
 
   const openModal = (key: keyof typeof modalState) =>
     setModalState((prev) => ({ ...prev, [key]: true }));
@@ -44,7 +47,7 @@ export default function JobListingDashboard() {
 
   return (
     <>
-      <div className="w-full p-6 dark:bg-zinc-900 rounded-2xl shadow-lg space-y-6">
+      <div className="w-full p-6 rounded-2xl shadow-lg space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold text-foreground">
             Your Job Listings
@@ -96,7 +99,6 @@ export default function JobListingDashboard() {
               stripedRows
               tableStyle={{ minWidth: "100%" }}
               rowClassName={() => "text-sm"}>
-              
               <Column
                 field="title"
                 header="Title"

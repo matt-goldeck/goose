@@ -112,7 +112,7 @@ export const ApplicationSteps = () => {
         marker={customizedMarker}
         content={getTimelineContentForItem}
       />
-      <Divider className="mt-4 mb-6 border-t border-zinc-300 dark:border-zinc-700" />
+      <Divider className="mt-4 mb-6 border-t" />
       {/* Only show add buttons if outcome is empty */}
       {isOutcomeEmpty && (
         <div>

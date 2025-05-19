@@ -16,15 +16,11 @@ export const ApplicationDetail = () => {
   if (!jobListing.application) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
-        <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">
-          No Application Found
-        </h2>
-        <p className="text-sm text-zinc-500">
-          You have not applied for this job yet.
-        </p>
+        <h2 className="text-2xl font-semibold">No Application Found</h2>
+        <p className="text-sm">You have not applied for this job yet.</p>
         <Button
           label="Apply to Job"
-          className="mt-4 bg-zinc-700 p-3"
+          className="mt-4 p-3"
           onClick={async () => {
             await createApplication(jobListing.id);
             loadJobListing();
@@ -35,7 +31,7 @@ export const ApplicationDetail = () => {
   }
   return (
     <div className="flex flex-col">
-      <ApplicationSteps/>
+      <ApplicationSteps />
     </div>
   );
 };

@@ -119,7 +119,8 @@ export default function JobCompanyForm({
           label={jobCompany ? "Update Company" : "Create Company"}
           type="submit"
           loading={isSubmitting}
-          className="bg-secondary rounded-md p-2"
+          className="p-2"
+          rounded
         />
       </div>
     </form>

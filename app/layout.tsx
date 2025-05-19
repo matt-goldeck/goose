@@ -1,10 +1,12 @@
 import HeaderAuth from "@/components/header-auth";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { PrimeReactProvider } from "primereact/api";
+import "primereact/resources/themes/saga-orange/theme.css";
+import "primereact/resources/primereact.min.css"; // Core styles (always required)
+import "primeicons/primeicons.css"; // Optional for icons
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -13,7 +15,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Afterburner",
-  description: "The fastest way to find a job",
+  description: "Your job hunt wingman",
   icons: {
     icon: {
       url: "/favicon.ico",
@@ -42,12 +44,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
-      <body className="bg-background text-foreground">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange>
+      <PrimeReactProvider>
+        <body>
           <main className="min-h-screen flex flex-col">
             {/* Nav */}
             <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
@@ -65,13 +63,9 @@ export default function RootLayout({
                 {children}
               </div>
             </div>
-
-            <footer className="w-full flex items-center justify-center border-t text-center text-xs gap-8 py-8">
-              <ThemeSwitcher />
-            </footer>
           </main>
-        </ThemeProvider>
-      </body>
+        </body>
+      </PrimeReactProvider>
       <Analytics />
     </html>
   );

@@ -26,8 +26,7 @@ export const ApplicationOutlineTimelineComponent = ({
   return (
     <Card
       title={formatOutcomeTypeString(applicationOutcome.outcome)}
-      subTitle={new Date(applicationOutcome.created_at).toLocaleString()}
-      className="bg-zinc-600 dark:bg-zinc-800">
+      subTitle={new Date(applicationOutcome.created_at).toLocaleString()}>
       <p className="text-sm">{applicationOutcome.notes}</p>
       <div>
         <Button

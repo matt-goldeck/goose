@@ -113,7 +113,7 @@ export default function CompatibilityScoreManageModal({
           {error && <p className="text-sm text-red-600">{error}</p>}
           <Button
             label="Calculate"
-            className="bg-zinc-700 p-3"
+            className="p-3"
             type="submit"
             loading={isSubmitting}
           />

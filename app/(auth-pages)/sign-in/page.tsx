@@ -14,7 +14,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
         <div className="space-y-1">
           <h1 className="text-3xl font-semibold text-center">Sign in</h1>
           <p className="text-sm text-muted-foreground text-center">
-            Don’t have an account?{" "}
+            Don't have an account?{" "}
             <Link href="/sign-up" className="underline">
               Sign up
             </Link>
@@ -31,6 +31,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
               name="email"
               placeholder="you@example.com"
               required
+              className="p-2"
             />
           </div>
 
@@ -51,13 +52,16 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
               name="password"
               placeholder="••••••••"
               required
+              className="p-2"
             />
           </div>
 
-          <Button formAction={signInAction} className="w-full justify-center" outlined>
-            Sign in
-          </Button>
-
+          <Button
+            formAction={signInAction}
+            className="w-full justify-center"
+            label="Submit"
+            outlined
+          />
           <FormMessage message={searchParams} />
         </div>
       </form>

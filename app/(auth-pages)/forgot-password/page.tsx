@@ -30,11 +30,14 @@ export default async function ForgotPassword(props: {
             name="email"
             placeholder="you@example.com"
             required
-            className="px-3 py-2 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+            className="px-3 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-primary text-sm"
           />
         </div>
 
-        <Button formAction={forgotPasswordAction} className="w-full justify-center" outlined>
+        <Button
+          formAction={forgotPasswordAction}
+          className="w-full justify-center"
+          outlined>
           Reset Password
         </Button>
 

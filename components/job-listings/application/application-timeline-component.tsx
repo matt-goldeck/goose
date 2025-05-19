@@ -21,13 +21,14 @@ export const ApplicationTimelineComponent = ({
   return (
     <Card
       title="Applied"
-      subTitle={new Date(application.created_at).toLocaleString()}
-      className="bg-zinc-600 dark:bg-zinc-800">
+      subTitle={new Date(application.created_at).toLocaleString()}>
       <Button
         icon="pi pi-trash"
         tooltip="Delete"
-        className="p-button-rounded p-button-text text-primary dark:text-primary"
+        className="dark:text-primary"
         severity="danger"
+        text
+        rounded
         onClick={handleDelete}
       />
     </Card>
