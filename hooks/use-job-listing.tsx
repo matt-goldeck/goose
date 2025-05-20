@@ -1,6 +1,7 @@
 "use client";
 
 import { JobListingWithCompanyAndApplication } from "@/lib/types/db";
+import { filterJobListings, JobListingFilters } from "@/utils/job-listings";
 import { getJobListings } from "@/utils/supabase/client-queries";
 import * as React from "react";
 
@@ -9,6 +10,8 @@ interface JobListingContext {
   isLoadingJobListings: boolean;
   hasLoadedJobListings: boolean;
   loadJobListings: () => Promise<void>;
+  filters: JobListingFilters;
+  setFilters: React.Dispatch<React.SetStateAction<JobListingFilters>>;
 }
 
 const JobListingContext = React.createContext<JobListingContext | undefined>(
@@ -30,9 +33,13 @@ interface JobListingProviderProps {
 export function JobListingProvider({ children }: JobListingProviderProps) {
   const [isLoadingJobListings, setIsLoadingJobListings] = React.useState(true);
   const [hasLoadedJobListings, setHasLoadedJobListings] = React.useState(false);
-  const [jobListings, setJobListings] = React.useState<JobListingWithCompanyAndApplication[]>(
-    []
-  );
+  const [jobListings, setJobListings] = React.useState<
+    JobListingWithCompanyAndApplication[]
+  >([]);
+  const [filters, setFilters] = React.useState<JobListingFilters>({
+    status: undefined,
+    companyId: undefined,
+  });
 
   const loadJobListings = async () => {
     setIsLoadingJobListings(true);
@@ -48,13 +55,20 @@ export function JobListingProvider({ children }: JobListingProviderProps) {
     loadJobListings();
   }, []);
 
+  // Memoize filtered results so they update when filters change
+  const filteredJobListings = React.useMemo(() => {
+    return filterJobListings(jobListings, filters);
+  }, [jobListings, filters]);
+
   return (
     <JobListingContext.Provider
       value={{
-        jobListings,
+        jobListings: filteredJobListings,
         isLoadingJobListings,
         hasLoadedJobListings,
         loadJobListings,
+        filters,
+        setFilters,
       }}>
       {children}
     </JobListingContext.Provider>

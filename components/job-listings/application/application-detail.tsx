@@ -9,7 +9,6 @@ export const ApplicationDetail = () => {
   const { jobListing, isLoadingJobListing, loadJobListing } =
     useJobListingDetail();
 
-  console.log("jobListing", jobListing);
   if (isLoadingJobListing || !jobListing) {
     return <ProgressSpinner />;
   }

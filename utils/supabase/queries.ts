@@ -51,6 +51,20 @@ export const getJobListingsForSBC = async (supabaseClient: SupabaseClient) => {
   if (error) {
     throw error;
   }
+
+  // Reshape application and its outcome
+  data.forEach((jobListing) => {
+    if (jobListing.application?.[0]) {
+      jobListing.application = {
+        ...jobListing.application[0],
+        application_outcome:
+          jobListing.application[0].application_outcome?.[0] ?? null,
+      };
+    } else {
+      jobListing.application = null;
+    }
+  });
+
   return data as JobListingWithCompanyAndApplication[];
 };
 
