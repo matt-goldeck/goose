@@ -18,10 +18,8 @@ export const ApplicationTimelineComponent = ({
     loadJobListing();
   };
 
-  return (
-    <Card
-      title="Applied"
-      subTitle={new Date(application.created_at).toLocaleString()}>
+  const footer = (
+    <>
       <Button
         icon="pi pi-trash"
         tooltip="Delete"
@@ -31,6 +29,14 @@ export const ApplicationTimelineComponent = ({
         rounded
         onClick={handleDelete}
       />
-    </Card>
+    </>
+  );
+  return (
+    <Card
+      title="Applied"
+      subTitle={new Date(application.created_at).toLocaleString()}
+      footer={footer}
+      className="outline-harvest outline"
+    />
   );
 };

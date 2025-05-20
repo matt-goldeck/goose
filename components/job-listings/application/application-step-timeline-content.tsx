@@ -23,28 +23,34 @@ export const ApplicationStepTimelineContent = ({
     loadJobListing();
   };
 
+  const footer = (
+    <>
+      <Button
+        icon="pi pi-pencil"
+        tooltip="Edit"
+        onClick={() => setEditModalVisible(true)}
+        text
+        rounded
+      />
+      <Button
+        icon="pi pi-trash"
+        tooltip="Delete"
+        severity="danger"
+        onClick={handleDelete}
+        text
+        rounded
+      />
+    </>
+  );
+
   return (
     <Card
       title={formatTypeString(step.step_type)}
-      subTitle={new Date(step.created_at).toLocaleString()}>
-      <p className="text-sm">{step.notes}</p>
-      <div>
-        <Button
-          icon="pi pi-pencil"
-          tooltip="Edit"
-          onClick={() => setEditModalVisible(true)}
-          text
-          rounded
-        />
-        <Button
-          icon="pi pi-trash"
-          tooltip="Delete"
-          severity="danger"
-          onClick={handleDelete}
-          text
-          rounded
-        />
-      </div>
+      subTitle={new Date(step.created_at).toLocaleString()}
+      footer={footer}
+      className="outline-harvest outline"
+    >
+      {step.notes}
       <ApplicationStepManageModal
         applicationStep={step}
         isVisible={editModalVisible}

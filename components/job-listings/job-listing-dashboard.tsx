@@ -13,6 +13,7 @@ import JobListingManageModal from "@/components/job-listings/job-listing-manage-
 import JobCompanyManageModal from "@/components/job-companies/job-company-manage-modal";
 import ResumeManageModal from "@/components/resumes/resume-manage-modal";
 import { formatDate } from "@/utils/dates";
+import { Card } from "primereact/card";
 
 export default function JobListingDashboard() {
   const { jobListings, isLoadingJobListings, loadJobListings } =
@@ -46,11 +47,11 @@ export default function JobListingDashboard() {
   });
 
   return (
-    <>
+    <Card className="outline shadow-sm rounded-2xl">
       <div className="w-full p-6 rounded-2xl shadow-lg space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold text-foreground">
-            Your Job Listings
+            Saved Listings
           </h1>
           <div className="flex flex-wrap gap-2">
             <Dropdown
@@ -106,7 +107,7 @@ export default function JobListingDashboard() {
                 body={(row) => (
                   <Link
                     href={`/dashboard/listing/${row.id}`}
-                    className="text-blue-300 hover:underline font-medium max-w-[400px] truncate block">
+                    className="text-harvest hover:underline font-medium max-w-[400px] truncate block">
                     {row.title}
                   </Link>
                 )}
@@ -166,6 +167,6 @@ export default function JobListingDashboard() {
           loadResumes();
         }}
       />
-    </>
+    </Card>
   );
 }

@@ -23,6 +23,11 @@ const config: Config = {
         md: "0.375rem",
         sm: "0.25rem",
       },
+      colors: {
+        mustard: "#C49A3C",
+        harvest: "#E0B354",
+        goldenochre: "#D6A84F",
+      },
     },
   },
   plugins: [],

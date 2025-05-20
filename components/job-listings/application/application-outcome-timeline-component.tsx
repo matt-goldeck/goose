@@ -23,26 +23,31 @@ export const ApplicationOutlineTimelineComponent = ({
     loadJobListing();
   };
 
+  const footer = (
+    <>
+      {" "}
+      <Button
+        icon="pi pi-pencil"
+        tooltip="Edit"
+        className="p-button-rounded p-button-text text-primary dark:text-primary"
+        onClick={() => setEditModalVisible(true)}
+      />
+      <Button
+        icon="pi pi-trash"
+        tooltip="Delete"
+        className="p-button-rounded p-button-text text-primary dark:text-primary"
+        severity="danger"
+        onClick={handleDelete}
+      />
+    </>
+  );
   return (
     <Card
       title={formatOutcomeTypeString(applicationOutcome.outcome)}
-      subTitle={new Date(applicationOutcome.created_at).toLocaleString()}>
+      subTitle={new Date(applicationOutcome.created_at).toLocaleString()}
+      footer={footer}
+      className="outline-harvest outline">
       <p className="text-sm">{applicationOutcome.notes}</p>
-      <div>
-        <Button
-          icon="pi pi-pencil"
-          tooltip="Edit"
-          className="p-button-rounded p-button-text text-primary dark:text-primary"
-          onClick={() => setEditModalVisible(true)}
-        />
-        <Button
-          icon="pi pi-trash"
-          tooltip="Delete"
-          className="p-button-rounded p-button-text text-primary dark:text-primary"
-          severity="danger"
-          onClick={handleDelete}
-        />
-      </div>
       <ApplicationOutcomeManageModal
         isVisible={editModalVisible}
         setIsVisible={setEditModalVisible}
