@@ -1,25 +1,12 @@
-import JobListingDashboard from "@/components/job-listings/job-listing-dashboard";
-import PageContainer from "@/components/ui/page-container";
-import { JobListingProvider } from "@/hooks/use-job-listing";
-import { createClient } from "@/utils/supabase/server";
+import { getIsUserAuthorized } from "@/auth";
 import { redirect } from "next/navigation";
 
-export default async function DashboardPage() {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/sign-in");
+export default async function Dashboard() {
+  const userAuthorized = await getIsUserAuthorized();
+  if (!userAuthorized) {
+    redirect("/sign-in");
+  } else {
+    // TODO: Some kind of dashboard page here? For now redirect to listings
+    redirect("/dashboard/listings");
   }
-
-  return (
-    <PageContainer>
-      <JobListingProvider>
-        <JobListingDashboard />
-      </JobListingProvider>
-    </PageContainer>
-  );
 }

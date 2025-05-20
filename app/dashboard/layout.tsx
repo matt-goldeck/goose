@@ -1,5 +1,4 @@
 import { JobCompanyProvider } from "@/hooks/use-job-company";
-import { ResumeProvider } from "@/hooks/use-resume";
 
 export default function DashboardLayout({
   children,
@@ -8,9 +7,7 @@ export default function DashboardLayout({
 }) {
   return (
     <main>
-      <JobCompanyProvider>
-          <ResumeProvider>{children}</ResumeProvider>
-      </JobCompanyProvider>
+      <JobCompanyProvider>{children}</JobCompanyProvider>
     </main>
   );
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { Button } from "primereact/button";
 
-export default async function AuthButton() {
+export default async function HeaderAuth() {
   const supabase = await createClient();
 
   const {
