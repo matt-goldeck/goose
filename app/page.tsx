@@ -1,15 +1,8 @@
-import { getIsUserAuthorized } from "@/auth";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 
 export default async function Home() {
-  const userAuthorized = await getIsUserAuthorized();
-  if (!userAuthorized) {
-    redirect("/sign-in");
-  }
-
   return (
     <div className="min-h-screen">
       {/* Hero */}
