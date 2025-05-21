@@ -7,6 +7,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import localFont from "next/font/local";
 import Navbar from "@/components/header/navbar";
+import Footer from "@/components/footer/footer";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -28,7 +29,6 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Afterburner",
@@ -48,7 +48,6 @@ export const metadata = {
     },
   },
 };
-
 
 export default function RootLayout({
   children,
@@ -72,6 +71,9 @@ export default function RootLayout({
                 {children}
               </div>
             </div>
+
+            {/* Footer */}
+            <Footer />
           </main>
         </body>
       </PrimeReactProvider>
