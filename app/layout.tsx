@@ -12,11 +12,22 @@ const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-const vt323 = localFont({
+const tourney = localFont({
   src: "./fonts/Tourney-VariableFont_wdth,wght.ttf",
   variable: "--font-Tourney",
   weight: "100 900",
 });
+
+const jetBrainsMono = localFont({
+  src: "./fonts/JetBrainsMono-VariableFont_wght.ttf",
+  variable: "--font-JetBrainsMono",
+});
+
+const geistSans = Geist({
+  display: "swap",
+  subsets: ["latin"],
+});
+
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
@@ -38,10 +49,6 @@ export const metadata = {
   },
 };
 
-const geistSans = Geist({
-  display: "swap",
-  subsets: ["latin"],
-});
 
 export default function RootLayout({
   children,
@@ -51,10 +58,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.className} ${vt323.variable}`}
+      className={`${jetBrainsMono.variable} ${geistSans.className} ${tourney.variable} `}
       suppressHydrationWarning>
       <PrimeReactProvider>
-        <body>
+        <body className="font-sans">
           <main className="min-h-screen flex flex-col">
             {/* Nav */}
             <Navbar />

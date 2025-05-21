@@ -48,7 +48,7 @@ export const ApplicationStepTimelineContent = ({
       title={formatTypeString(step.step_type)}
       subTitle={new Date(step.created_at).toLocaleString()}
       footer={footer}
-      className="outline-harvest outline"
+      className="outline-harvest outline font-jetBrainsMono"
     >
       {step.notes}
       <ApplicationStepManageModal

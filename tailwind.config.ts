@@ -29,7 +29,9 @@ const config: Config = {
         goldenochre: "#D6A84F",
       },
       fontFamily: {
+        sans: ["var(--font-JetBrainsMono)", "sans-serif"],
         tourney: ["var(--font-Tourney)"],
+        jetBrainsMono: ["var(--font-JetBrainsMono)"],
       },
     },
   },

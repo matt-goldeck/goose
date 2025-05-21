@@ -19,7 +19,7 @@ export default function JobCompanyManageModal({
     <Dialog
       visible={isVisible}
       onHide={() => setIsVisible(false)}
-      className="rounded-xl shadow-2xl w-full max-w-2xl"
+      className="rounded-xl shadow-2xl w-full max-w-2xl font-tourney"
       header={jobCompany ? "Edit Company" : "Add Company"}>
       <JobCompanyForm
         jobCompany={jobCompany}

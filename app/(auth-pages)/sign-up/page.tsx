@@ -22,7 +22,7 @@ export default async function Signup(props: {
     <PageContainer>
       <form className="w-full max-w-sm mx-auto flex flex-col gap-6">
         <div className="space-y-1 text-center">
-          <h1 className="text-3xl font-semibold">Sign up</h1>
+          <h1 className="text-3xl font-semibold font-tourney">Sign up</h1>
           <p className="text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link href="/sign-in" className="underline">
@@ -58,10 +58,9 @@ export default async function Signup(props: {
             />
           </div>
 
-          <Button formAction={signUpAction} className="w-full justify-center" outlined>
+          <Button formAction={signUpAction} className="w-full justify-center font-jetBrainsMono" outlined>
             Sign up
           </Button>
-
           <FormMessage message={searchParams} />
         </div>
       </form>

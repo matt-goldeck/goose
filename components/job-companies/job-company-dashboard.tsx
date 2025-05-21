@@ -30,7 +30,7 @@ export default function JobCompanyDashboard() {
         {website}
       </a>
     ) : (
-      <Tag severity="warning" value="No Website" />
+      <Tag severity="warning" value="No Website" className="font-jetBrainsMono"/>
     );
 
   const [editingCompany, setEditingCompany] = useState<JobCompany | undefined>(
@@ -62,7 +62,7 @@ export default function JobCompanyDashboard() {
         <Button
           label="Add Company"
           icon="pi pi-plus"
-          className="btn-primary font-tourney"
+          className="btn-primary font-jetBrainsMono"
           onClick={() => setIsModalVisible(true)}
         />
 
@@ -77,7 +77,7 @@ export default function JobCompanyDashboard() {
               paginator
               rows={10}
               stripedRows
-              className="rounded-lg shadow-sm"
+              className="rounded-lg shadow-sm font-jetBrainsMono"
               emptyMessage="No companies found."
               tableStyle={{ minWidth: "100%" }}
               rowClassName={() => "text-sm"}>

@@ -18,7 +18,7 @@ export default function ResumeManageModal({
     <Dialog
       visible={isVisible}
       onHide={() => setIsVisible(false)}
-      className="rounded-xl shadow-2xl w-full max-w-2xl"
+      className="rounded-xl shadow-2xl w-full max-w-2xl font-tourney"
       header={resume ? "Edit Resume" : "Add Resume"}>
       <ResumeUploadForm resume={resume} onSubmitCallback={onSubmitCallback} />
     </Dialog>

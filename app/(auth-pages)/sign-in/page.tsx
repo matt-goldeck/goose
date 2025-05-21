@@ -12,7 +12,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
     <PageContainer>
       <form className="w-full max-w-sm mx-auto flex flex-col gap-6">
         <div className="space-y-1">
-          <h1 className="text-3xl font-semibold text-center">Sign in</h1>
+          <h1 className="text-3xl font-semibold text-center font-tourney">Sign in</h1>
           <p className="text-sm text-muted-foreground text-center">
             Don't have an account?{" "}
             <Link href="/sign-up" className="underline">
@@ -58,8 +58,8 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
 
           <Button
             formAction={signInAction}
-            className="w-full justify-center"
-            label="Submit"
+            className="w-full justify-center font-jetBrainsMono"
+            label="Login"
             outlined
           />
           <FormMessage message={searchParams} />

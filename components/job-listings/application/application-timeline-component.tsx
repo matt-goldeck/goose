@@ -36,7 +36,7 @@ export const ApplicationTimelineComponent = ({
       title="Applied"
       subTitle={new Date(application.created_at).toLocaleString()}
       footer={footer}
-      className="outline-harvest outline"
+      className="outline-harvest outline font-jetBrainsMono"
     />
   );
 };

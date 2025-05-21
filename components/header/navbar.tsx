@@ -31,16 +31,16 @@ export default async function NavBar() {
         {user ? (
           <div className="flex items-center gap-4">
             <form action={signOutAction}>
-              <Button className="font-tourney">Sign out</Button>
+              <Button className="font-jetBrainsMono">Sign Out</Button>
             </form>
           </div>
         ) : (
           <div className="flex gap-2 font-tourney">
-            <Button className="font-tourney">
-              <Link href="/sign-in">Sign in</Link>
+            <Button className="font-jetBrainsMono">
+              <Link href="/sign-in">Sign In</Link>
             </Button>
-            <Button className="font-tourney">
-              <Link href="/sign-up">Sign up</Link>
+            <Button className="font-jetBrainsMono">
+              <Link href="/sign-up">Sign Up</Link>
             </Button>
           </div>
         )}

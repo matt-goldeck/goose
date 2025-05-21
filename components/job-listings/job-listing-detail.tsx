@@ -37,10 +37,10 @@ export default function JobListingDetail() {
 
   return (
     <div className="w-full px-4 py-10">
-      <Card className="w-full max-w-3xl mx-auto shadow-sm rounded-2xl p-6 outline">
+      <Card className="w-full max-w-3xl mx-auto shadow-sm rounded-2xl p-6 outline font-jetBrainsMono">
         <header className="flex flex-col items-center text-center mb-6">
           <h1 className="text-2xl font-semibold font-tourney">{jobListing.title}</h1>
-          <h2 className="text-md font-semibold mb-2 font-tourney">
+          <h2 className="text-md font-semibold mb-2 font-jetBrainsMono">
             {jobListing.job_company.name}
           </h2>
           <div className="flex gap-2">
@@ -91,7 +91,7 @@ export default function JobListingDetail() {
 
         <Divider className="mt-4 mb-6 border-t" />
         <section className="flex flex-col text-center">
-          <TabView>
+          <TabView className="font-jetBrainsMono">
             <TabPanel header="Application">
               <ApplicationDetail />
             </TabPanel>

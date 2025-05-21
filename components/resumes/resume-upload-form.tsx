@@ -114,7 +114,7 @@ export default function ResumeUploadForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md p-4">
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md p-4 font-jetBrainsMono">
       <div>
         <label className="block mb-1 font-medium">Resume Name</label>
         <input
@@ -144,6 +144,7 @@ export default function ResumeUploadForm({
         label={resume ? "Update Resume" : "Upload Resume"}
         type="submit"
         loading={isSubmitting}
+        className="font-jetBrainsMono"
       />
       {submitError && <p className="text-red-500">{submitError}</p>}
     </form>

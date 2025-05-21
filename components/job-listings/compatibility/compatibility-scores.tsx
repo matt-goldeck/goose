@@ -33,7 +33,7 @@ export function CompatibilityScores() {
         </p>
         <Button
           label="Calculate Score"
-          className="mt-4 p-3"
+          className="mt-4 p-3 font-jetBrainsMono"
           onClick={() => setIsAddScoreModalVisible(true)}
         />
         <CompatibilityScoreManageModal

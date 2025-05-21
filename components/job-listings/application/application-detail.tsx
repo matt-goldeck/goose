@@ -14,7 +14,7 @@ export const ApplicationDetail = () => {
   }
   if (!jobListing.application) {
     return (
-      <div className="flex flex-col items-center justify-center h-full">
+      <div className="flex flex-col items-center justify-center h-full ">
         <h2 className="text-2xl font-semibold">No Application Found</h2>
         <p className="text-sm">You have not applied for this job yet.</p>
         <Button

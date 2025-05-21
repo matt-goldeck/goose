@@ -108,7 +108,7 @@ export default function JobListingForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-3 p-6 rounded-lg shadow-md">
+      className="space-y-3 p-6 rounded-lg shadow-md font-jetBrainsMono">
       <div>
         <label htmlFor="title" className="block font-medium mb-1">
           Job Title
@@ -193,6 +193,7 @@ export default function JobListingForm({
           label={jobListing ? "Update Listing" : "Create Listing"}
           type="submit"
           loading={isSubmitting}
+          className="font-jetBrainsMono"
         />
       </div>
     </form>

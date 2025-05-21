@@ -89,7 +89,7 @@ export default function JobCompanyForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 p-6 rounded-lg shadow-md">
+      className="space-y-6 p-6 rounded-lg shadow-md font-jetBrainsMono">
       <div>
         <label htmlFor="name" className="block font-medium mb-1">
           Company Name
@@ -120,7 +120,7 @@ export default function JobCompanyForm({
           label={jobCompany ? "Update Company" : "Create Company"}
           type="submit"
           loading={isSubmitting}
-          className="p-2"
+          className="p-2 font-jetBrainsMono"
           rounded
         />
       </div>

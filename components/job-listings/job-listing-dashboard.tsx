@@ -44,19 +44,19 @@ export default function JobListingDashboard() {
             <Button
               label="Add Listing"
               icon="pi pi-plus"
-              className="btn-primary font-tourney"
+              className="btn-primary font-jetBrainsMono"
               onClick={() => openModal("job")}
             />
             <Button
               label="Add Company"
               icon="pi pi-plus"
-              className="btn-primary font-tourney"
+              className="btn-primary font-jetBrainsMono"
               onClick={() => openModal("company")}
             />
             <Button
               label="Add Resume"
               icon="pi pi-plus"
-              className="btn-primary font-tourney"
+              className="btn-primary font-jetBrainsMono"
               onClick={() => openModal("resume")}
             />
           </div>
@@ -73,7 +73,7 @@ export default function JobListingDashboard() {
               value={jobListings}
               paginator
               rows={10}
-              className="rounded-lg shadow-sm"
+              className="rounded-lg shadow-sm font-jetBrainsMono"
               stripedRows
               tableStyle={{ minWidth: "100%" }}
               rowClassName={() => "text-sm"}>

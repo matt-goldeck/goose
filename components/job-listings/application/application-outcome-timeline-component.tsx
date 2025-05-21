@@ -46,7 +46,7 @@ export const ApplicationOutlineTimelineComponent = ({
       title={formatOutcomeTypeString(applicationOutcome.outcome)}
       subTitle={new Date(applicationOutcome.created_at).toLocaleString()}
       footer={footer}
-      className="outline-harvest outline">
+      className="outline-harvest outline font-jetBrainsMono">
       <p className="text-sm">{applicationOutcome.notes}</p>
       <ApplicationOutcomeManageModal
         isVisible={editModalVisible}
