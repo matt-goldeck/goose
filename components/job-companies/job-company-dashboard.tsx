@@ -56,13 +56,13 @@ export default function JobCompanyDashboard() {
   return (
     <Card className="outline shadow-sm rounded-2xl">
       <div className="w-full p-6 rounded-2xl shadow-lg space-y-6">
-        <h1 className="text-2xl font-semibold text-foreground">
+        <h1 className="text-2xl font-semibold text-foreground font-tourney">
           Saved Companies
         </h1>
         <Button
           label="Add Company"
           icon="pi pi-plus"
-          className="btn-primary"
+          className="btn-primary font-tourney"
           onClick={() => setIsModalVisible(true)}
         />
 

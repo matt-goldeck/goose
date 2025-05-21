@@ -39,8 +39,8 @@ export default function JobListingDetail() {
     <div className="w-full px-4 py-10">
       <Card className="w-full max-w-3xl mx-auto shadow-sm rounded-2xl p-6 outline">
         <header className="flex flex-col items-center text-center mb-6">
-          <h1 className="text-2xl font-semibold ">{jobListing.title}</h1>
-          <h2 className="text-md font-semibold mb-2">
+          <h1 className="text-2xl font-semibold font-tourney">{jobListing.title}</h1>
+          <h2 className="text-md font-semibold mb-2 font-tourney">
             {jobListing.job_company.name}
           </h2>
           <div className="flex gap-2">
@@ -74,7 +74,7 @@ export default function JobListingDetail() {
         </header>
 
         <section className="flex flex-col items-center text-center mb-6">
-          <p className="font-semibold mb-2">Description</p>
+          <p className="font-semibold mb-2 font-tourney">Description</p>
           <div className="rounded-md p-4 text-sm whitespace-pre-wrap leading-relaxed text-left w-full">
             {jobListing.description}
           </div>
@@ -82,7 +82,7 @@ export default function JobListingDetail() {
 
         {jobListing.user_notes && (
           <section className="flex flex-col items-center text-center mb-6">
-            <p className="font-semibold mb-2">Notes</p>
+            <p className="font-semibold mb-2 font-tourney">Notes</p>
             <div className="rounded-md p-4 text-sm leading-relaxed text-left w-full">
               {jobListing.user_notes}
             </div>
@@ -91,7 +91,7 @@ export default function JobListingDetail() {
 
         <Divider className="mt-4 mb-6 border-t" />
         <section className="flex flex-col text-center">
-          <TabView className="text-primary">
+          <TabView>
             <TabPanel header="Application">
               <ApplicationDetail />
             </TabPanel>

@@ -36,7 +36,7 @@ export default function JobListingDashboard() {
   return (
     <Card className="outline shadow-sm rounded-2xl">
       <div className="w-full p-6 rounded-2xl shadow-lg space-y-6">
-        <h1 className="text-2xl font-semibold text-foreground">
+        <h1 className="text-2xl font-semibold text-foreground font-tourney">
           Saved Listings
         </h1>
         <div className="flex justify-between items-center flex-wrap gap-2">
@@ -44,19 +44,19 @@ export default function JobListingDashboard() {
             <Button
               label="Add Listing"
               icon="pi pi-plus"
-              className="btn-primary"
+              className="btn-primary font-tourney"
               onClick={() => openModal("job")}
             />
             <Button
               label="Add Company"
               icon="pi pi-plus"
-              className="btn-primary"
+              className="btn-primary font-tourney"
               onClick={() => openModal("company")}
             />
             <Button
               label="Add Resume"
               icon="pi pi-plus"
-              className="btn-primary"
+              className="btn-primary font-tourney"
               onClick={() => openModal("resume")}
             />
           </div>

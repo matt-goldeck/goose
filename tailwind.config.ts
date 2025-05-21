@@ -28,6 +28,9 @@ const config: Config = {
         harvest: "#E0B354",
         goldenochre: "#D6A84F",
       },
+      fontFamily: {
+        tourney: ["var(--font-Tourney)"],
+      },
     },
   },
   plugins: [],

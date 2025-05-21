@@ -1,17 +1,22 @@
-import HeaderAuth from "@/components/header/header-auth";
 import { Geist } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/arya-orange/theme.css";
-import "primereact/resources/primereact.min.css"; // Core styles (always required)
-import "primeicons/primeicons.css"; // Optional for icons
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import localFont from "next/font/local";
 import Navbar from "@/components/header/navbar";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
+
+const vt323 = localFont({
+  src: "./fonts/Tourney-VariableFont_wdth,wght.ttf",
+  variable: "--font-Tourney",
+  weight: "100 900",
+});
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
@@ -44,7 +49,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={geistSans.className} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${geistSans.className} ${vt323.variable}`}
+      suppressHydrationWarning>
       <PrimeReactProvider>
         <body>
           <main className="min-h-screen flex flex-col">
