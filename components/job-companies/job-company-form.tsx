@@ -26,6 +26,7 @@ export default function JobCompanyForm({
     name: jobCompany?.name || "",
     website: jobCompany?.website || "",
     user_id: jobCompany?.user_id || undefined,
+    id: jobCompany?.id,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);

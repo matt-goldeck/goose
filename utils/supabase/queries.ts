@@ -152,6 +152,20 @@ export const getJobCompaniesForSBC = async (supabaseClient: SupabaseClient) => {
   return data as JobCompany[];
 };
 
+export const deleteJobCompanyForSBC = async (
+  supabaseClient: SupabaseClient,
+  id: number
+) => {
+  const { data, error } = await supabaseClient
+    .from("job_company")
+    .delete()
+    .eq("id", id);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
 export const createJobCompanyForSBC = async (
   supabaseClient: SupabaseClient,
   jobCompany: Partial<JobCompany>

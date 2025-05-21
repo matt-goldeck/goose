@@ -19,8 +19,12 @@ export default function JobListingDetail() {
 
   const handleDelete = async () => {
     if (!jobListing) return;
-    await deleteJobListing(jobListing.id);
-    router.push("/dashboard");
+    if (
+      window.confirm(`Are you sure you want to delete "${jobListing.title}"?`)
+    ) {
+      await deleteJobListing(jobListing.id);
+      router.push("/dashboard");
+    }
   };
 
   if (isLoadingJobListing || !jobListing) {

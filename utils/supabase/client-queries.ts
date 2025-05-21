@@ -16,6 +16,7 @@ import {
   deleteApplicationForSBC,
   deleteApplicationOutcomeForSBC,
   deleteApplicationStepForSBC,
+  deleteJobCompanyForSBC,
   deleteJobListingForSBC,
   getCompatibilityScoresForSBC,
   getJobCompaniesForSBC,
@@ -56,6 +57,11 @@ export const createJobCompany = async (jobCompany: JobCompany) => {
 export const updateJobCompany = async (jobCompany: JobCompany) => {
   const supabase = createClient();
   return updateJobCompanyForSBC(supabase, jobCompany);
+};
+
+export const deleteJobCompany = async (id: number) => {
+  const supabase = createClient();
+  return deleteJobCompanyForSBC(supabase, id);
 };
 
 export const getJobListing = async (id: string) => {

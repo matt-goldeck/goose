@@ -36,11 +36,9 @@ export default function JobListingDashboard() {
   return (
     <Card className="outline shadow-sm rounded-2xl">
       <div className="w-full p-6 rounded-2xl shadow-lg space-y-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-semibold text-foreground">
-            Saved Listings
-          </h1>
-        </div>
+        <h1 className="text-2xl font-semibold text-foreground">
+          Saved Listings
+        </h1>
         <div className="flex justify-between items-center flex-wrap gap-2">
           <div className="flex gap-2 flex-wrap">
             <Button
@@ -85,7 +83,7 @@ export default function JobListingDashboard() {
                 sortable
                 body={(row) => (
                   <Link
-                    href={`/dashboard/listing/${row.id}`}
+                    href={`/dashboard/listings/${row.id}`}
                     className="text-harvest hover:underline font-medium max-w-[400px] truncate block">
                     {row.title}
                   </Link>
