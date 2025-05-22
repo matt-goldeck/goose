@@ -1,18 +1,27 @@
 import { signInAction } from "@/app/actions";
+import { getIsUserAuthorized } from "@/auth";
 import { FormMessage, Message } from "@/components/form-message";
 import PageContainer from "@/components/ui/page-container";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 
 export default async function Login(props: { searchParams: Promise<Message> }) {
   const searchParams = await props.searchParams;
 
+  const userAuthorized = await getIsUserAuthorized();
+  if (userAuthorized) {
+    redirect("/");
+  }
+
   return (
     <PageContainer>
       <form className="w-full max-w-sm mx-auto flex flex-col gap-6">
         <div className="space-y-1">
-          <h1 className="text-3xl font-semibold text-center font-tourney">Sign in</h1>
+          <h1 className="text-3xl font-semibold text-center font-tourney">
+            Sign in
+          </h1>
           <p className="text-sm text-muted-foreground text-center">
             Don't have an account?{" "}
             <Link href="/sign-up" className="underline">

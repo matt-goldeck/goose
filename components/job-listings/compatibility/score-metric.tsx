@@ -37,11 +37,11 @@ export function ScoreMetric({ label, value, maxValue }: ScoreMetricProps) {
 
   return (
     <div key={label} className="flex justify-between items-center">
-      <span className="text-sm text-gray-700">{label}</span>
+      <span className="text-sm">{label}</span>
       <Tag
         value={`${value} / ${maxValue}`}
         severity={severity}
-        className="ml-2"
+        className="ml-2 font-jetBrainsMono"
       />
     </div>
   );

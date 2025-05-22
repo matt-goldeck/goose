@@ -4,10 +4,17 @@ import Link from "next/link";
 import PageContainer from "@/components/ui/page-container";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
+import { getIsUserAuthorized } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function Signup(props: {
   searchParams: Promise<Message>;
 }) {
+  const userAuthorized = await getIsUserAuthorized();
+  if (userAuthorized) {
+    redirect("/");
+  }
+
   const searchParams = await props.searchParams;
 
   if ("message" in searchParams) {
@@ -58,7 +65,10 @@ export default async function Signup(props: {
             />
           </div>
 
-          <Button formAction={signUpAction} className="w-full justify-center font-jetBrainsMono" outlined>
+          <Button
+            formAction={signUpAction}
+            className="w-full justify-center font-jetBrainsMono"
+            outlined>
             Sign up
           </Button>
           <FormMessage message={searchParams} />

@@ -81,7 +81,7 @@ export default function JobListingForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -97,7 +97,7 @@ export default function JobListingForm({
     }
 
     // Create app
-    if (userSubmittedApplication) {
+    if (userSubmittedApplication && !jobListing) {
       await createApplication(result.id);
     }
 
@@ -178,16 +178,18 @@ export default function JobListingForm({
           className="w-full"
         />
       </div>
-      <div className="flex items-center gap-2">
-        <Checkbox
-          inputId="user-submitted-application"
-          checked={userSubmittedApplication}
-          onChange={(e) => setUserSubmittedApplication(e.checked ?? false)}
-        />
-        <label htmlFor="user-submitted-application" className="font-medium">
-          Submitted Application
-        </label>
-      </div>
+      {!jobListing && (
+        <div className="flex items-center gap-2">
+          <Checkbox
+            inputId="user-submitted-application"
+            checked={userSubmittedApplication}
+            onChange={(e) => setUserSubmittedApplication(e.checked ?? false)}
+          />
+          <label htmlFor="user-submitted-application" className="font-medium">
+            Submitted Application
+          </label>
+        </div>
+      )}
       <div className="flex justify-end">
         <Button
           label={jobListing ? "Update Listing" : "Create Listing"}
