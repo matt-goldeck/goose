@@ -10,9 +10,11 @@ export default async function Home() {
         <h1 className="text-5xl md:text-6xl font-bold font-tourney mb-4 text-harvest">
           Afterburner
         </h1>
-        <p className="text-xl md:text-2xl max-w-2xl mb-8">
-          Take control of your job hunt. Track applications, companies, and
-          outcomes with clarity and speed.
+        <p className="text-xl md:text-2xl max-w-2xl mb-1">
+          Lock in. Light the jets. Take off.
+        </p>
+        <p className="text-large md:text-xl max-w-2xl mb-8">
+          Track every application and deploy your AI co-pilot to zero in on the perfect job.
         </p>
         <Link href="/sign-up">
           <Button
