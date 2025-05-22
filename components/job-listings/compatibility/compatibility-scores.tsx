@@ -10,11 +10,11 @@ import CompatibilityScoreManageModal from "./compatibility-score-manage-modal";
 import { ScoreMetric } from "./score-metric";
 
 const BREAKDOWN_FIELDS = [
-  { key: "skills_match", label: "Skills match", maxValue: 35 },
-  { key: "experience_alignment", label: "Experience alignment", maxValue: 25 },
-  { key: "education_match", label: "Education match", maxValue: 10 },
-  { key: "keyword_overlap", label: "Keyword overlap", maxValue: 15 },
-  { key: "resume_quality", label: "Resume quality", maxValue: 15 },
+  { key: "skills_match", label: "Skills", maxValue: 35 },
+  { key: "experience_alignment", label: "Experience", maxValue: 25 },
+  { key: "education_match", label: "Education", maxValue: 10 },
+  { key: "keyword_overlap", label: "Keyword Overlap", maxValue: 15 },
+  { key: "resume_quality", label: "Resume Quality", maxValue: 15 },
   { key: "adjustments", label: "Adjustments", maxValue: 10 },
 ] as const;
 
