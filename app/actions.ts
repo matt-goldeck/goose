@@ -28,16 +28,22 @@ export const signUpAction = async (formData: FormData) => {
   });
 
   if (error || !data.user) {
-    const message = error
-      ? error.code + " " + error.message
-      : "An error occurred...";
+    let message = "An error occurred...";
+    if (error) {
+      if (error.message.includes("confirmation email")) {
+        message =
+          "There was a problem sending the confirmation email. Please contact support or try again later.";
+      } else {
+        message = `${error.code}: ${error.message}`;
+      }
+    }
     console.error(message);
     return encodedRedirect("error", "/sign-up", message);
   } else {
     return encodedRedirect(
       "success",
       "/sign-up",
-      "Thanks for signing up! Please check your email for a verification link."
+      "Thanks for signing up! Check your email for a verification link."
     );
   }
 };
@@ -53,6 +59,7 @@ export const signInAction = async (formData: FormData) => {
   });
 
   if (error) {
+    console.error(error.message);
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
