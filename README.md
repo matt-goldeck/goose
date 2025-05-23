@@ -3,7 +3,7 @@
 
 i feel the need: [the need for speed](https://www.youtube.com/watch?v=b8OdyAq7sfk)
 
-Goose is the frontend for Afterburner. Built with Next.js 14, Tailwind CSS, and PrimeReact, Goose provides a 'responsive', 'modern' interface for tracking job applications.
+Goose is the frontend for [Afterburner](https://www.batstolabs.com/projects/afterburner). Built with Next.js 14, Tailwind CSS, and PrimeReact, Goose provides a 'responsive', 'modern' interface for tracking job applications.
 
 ## 🧰 Tech Stack
 
