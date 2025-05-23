@@ -23,6 +23,6 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${getFrontEndURL()}/${redirectTo}`);
   }
 
-  // Push to dashboard if no redirect
-  return NextResponse.redirect(`${getFrontEndURL()}/dashboard`);
+  // Push to confirm page if no redirect
+  return NextResponse.redirect(`${getFrontEndURL()}/sign-up/success`);
 }
