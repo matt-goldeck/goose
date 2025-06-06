@@ -47,7 +47,8 @@ export const getOrCreateUserProfileForSBC = async (
 export const getJobListingsForSBC = async (supabaseClient: SupabaseClient) => {
   const { data, error } = await supabaseClient
     .from("job_listing")
-    .select("*, job_company(*), application(*, application_outcome(*))");
+    .select("*, job_company(*), application(*, application_outcome(*))")
+    .order("created_at", { ascending: true });
   if (error) {
     throw error;
   }
@@ -145,7 +146,10 @@ export const deleteJobListingForSBC = async (
 };
 
 export const getJobCompaniesForSBC = async (supabaseClient: SupabaseClient) => {
-  const { data, error } = await supabaseClient.from("job_company").select("*");
+  const { data, error } = await supabaseClient
+    .from("job_company")
+    .select("*")
+    .order("name", { ascending: true });
   if (error) {
     throw error;
   }
